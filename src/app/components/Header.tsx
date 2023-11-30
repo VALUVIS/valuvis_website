@@ -54,11 +54,11 @@ const Header: React.FC = () => {
         <ul className="flex flex-wrap space-x-8">
           {navigationLinks.map((link) => {
             if (link.title === 'Immobilien kaufen') {
-              return <DropdownMenu key={link.title} title={link.title} links={kaufLinks} />;
+              return <DropdownMenu key={link.title} title={link.title} path={link.path} links={kaufLinks} />;
             } else if (link.title === 'Immobilien verkaufen') {
-              return <DropdownMenu key={link.title} title={link.title} links={verkaufLinks} />;
+              return <DropdownMenu key={link.title} title={link.title} path={link.path} links={verkaufLinks} />;
             } else if (link.title === 'Mehr') {
-              return <DropdownMenu key={link.title} title={link.title} links={moreLinks} />;
+              return <DropdownMenu key={link.title} title={link.title} path={link.path} links={moreLinks} />;
             } else {
              return (
                 <li key={link.title}>
