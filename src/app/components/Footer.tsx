@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import React from 'react';
+import LinkedinIcon from './LinkedinIcon';
+import FacebookIcon from './FacebookIcon';
 
 type NavLink = {
     title: string;
@@ -52,23 +54,13 @@ const Footer: React.FC = () => {
             </nav>
             
             <div className="flex gap-4">
-                <Image
-                src="/logos/linkedin.svg"
-                alt="LinkedIn"
-                width={24}
-                height={24}
-                />
-                <Image
-                src="/logos/facebook.svg"
-                alt="Facebook"
-                width={24}
-                height={24}
-                />
+                <LinkedinIcon />
+                <FacebookIcon />
             </div>
         </div>
       
         <div className="flex flex-col space-y-4">
-            <h3 className="text-lg">Newsletter abonnieren</h3>
+            <h3 className="text-lg text-neutral-600">Newsletter abonnieren</h3>
             <form className="flex gap-2">
                 <input
                 type="email"
@@ -78,7 +70,7 @@ const Footer: React.FC = () => {
                 <button className="bg-orange-500 text-white p-2 rounded-lg">Abonnieren</button>
             </form>
             </div>
-        <div className="text-start mt-10">
+        <div className="text-start mt-10 text-neutral-600">
             © 2023 Valuvis Immobilien e.K.
         </div>
     </footer>
