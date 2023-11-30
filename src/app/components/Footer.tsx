@@ -3,6 +3,7 @@ import Image from 'next/image';
 import React from 'react';
 import LinkedinIcon from './LinkedinIcon';
 import FacebookIcon from './FacebookIcon';
+import NewsletterForm from './NewsletterForm';
 
 type NavLink = {
     title: string;
@@ -10,16 +11,17 @@ type NavLink = {
 };
 
 const navigationLinks: NavLink[] = [
-    { title: 'Über uns', path: '/ueber-valuvis' },
-    { title: 'Immobilienmarkt', path: '/immobilienmarkt' },
-    { title: 'Immobilien', path: '/immobilien' },
-    { title: 'Dienstleistungen', path: '/dienstleistungen' },
-    { title: 'Karriere', path: '/karriere' },
-    { title: 'FAQ', path: '/faq' },
-    { title: 'Ratgeber', path: '/ratgeber' },
-    { title: 'Kontakt', path: '/kontakt' },
-    { title: 'Datenschutz', path: '/datenschutz' },
-    { title: 'Impressum', path: '/impressum' },
+    { title: 'Über uns', path: '/UeberValuvis' },
+    { title: 'Immobilienmarkt', path: '/Immobilienmarkt' },
+    { title: 'Immobilien kaufen', path: '/Immobilien-kaufen' },
+    { title: 'Immobilien verkaufen', path: '/Immobilien-verkaufen' },
+    { title: 'Dienstleistungen', path: '/Dienstleistungen' },
+    { title: 'Karriere', path: '/Karriere' },
+    { title: 'FAQ', path: '/FAQ' },
+    { title: 'Ratgeber', path: '/Ratgeber' },
+    { title: 'Kontakt', path: '/Kontakt' },
+    { title: 'Datenschutz', path: '/Datenschutz' },
+    { title: 'Impressum', path: '/Impressum' },
 ];
   
 
@@ -61,15 +63,8 @@ const Footer: React.FC = () => {
       
         <div className="flex flex-col space-y-4">
             <h3 className="text-lg text-neutral-600">Newsletter abonnieren</h3>
-            <form className="flex gap-2">
-                <input
-                type="email"
-                placeholder="E-Mail Adresse"
-                className="border p-2 rounded-lg"
-                />
-                <button className="bg-orange-500 text-white p-2 rounded-lg">Abonnieren</button>
-            </form>
-            </div>
+            <NewsletterForm />
+        </div>
         <div className="text-start mt-10 text-neutral-600">
             © 2023 Valuvis Immobilien e.K.
         </div>
