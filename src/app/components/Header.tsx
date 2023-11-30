@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import React from 'react';
+import DropdownMenu from './DropdownMenu';
 
 type NavLink = {
   title: string;
@@ -11,12 +12,31 @@ const navigationLinks: NavLink[] = [
   { title: 'Home', path: '/' },
   { title: 'Über Valuvis', path: '/UeberValuvis' },
   { title: 'Immobilienmarkt', path: '/Immobilienmarkt' },
-  { title: 'Immobilien', path: '/Immobilien' },
+  { title: 'Immobilien kaufen', path: '/Immobilien-kaufen' },
+  { title: 'Immobilien verkaufen', path: '/Immobilien-verkaufen' },
   { title: 'Dienstleistungen', path: '/Dienstleistungen' },
+  { title: 'Mehr', path: '/Mehr' }
+];
+
+const kaufLinks: NavLink[] = [
+  { title: 'Eigentumswohnungen', path: '/Immobilien-kaufen/Eigentumswohnungen' },
+  { title: 'Einfamilienhäuser', path: '/Immobilien-kaufen/Einfamilienhaeuser' },
+  { title: 'Wohn- und Geschäftshäuser', path: '/Immobilien-kaufen/Wohn-undGeschaeftshaeuser' },
+  { title: 'Gewerbeimmobilien', path: '/Immobilien-kaufen/Gewerbeimmobilien' }
+];
+
+const verkaufLinks: NavLink[] = [
+  { title: 'Eigentumswohnungen', path: '/Immobilien-verkaufen/Eigentumswohnungen' },
+  { title: 'Einfamilienhäuser', path: '/Immobilien-verkaufen/Einfamilienhaeuser' },
+  { title: 'Wohn- und Geschäftshäuser', path: '/Immobilien-verkaufen/Wohn-undGeschaeftshaeuser' },
+  { title: 'Gewerbeimmobilien', path: '/Immobilien-verkaufen/Gewerbeimmobilien' }
+];
+
+const moreLinks: NavLink[] = [
   { title: 'Karriere', path: '/Karriere' },
   { title: 'FAQ', path: '/FAQ' },
   { title: 'Ratgeber', path: '/Ratgeber' },
-  { title: 'Kontakt', path: '/Kontakt' },
+  { title: 'Kontakt', path: '/Kontakt' }
 ];
 
 const Header: React.FC = () => {
@@ -32,31 +52,23 @@ const Header: React.FC = () => {
       </div>
       <nav className="flex-grow">
         <ul className="flex flex-wrap space-x-8">
-          {navigationLinks.map((link) => (
-            link.title === 'Immobilien' ? (
-              <li key={link.title} className="relative">
-                <div className='peer'>
+          {navigationLinks.map((link) => {
+            if (link.title === 'Immobilien kaufen') {
+              return <DropdownMenu key={link.title} title={link.title} links={kaufLinks} />;
+            } else if (link.title === 'Immobilien verkaufen') {
+              return <DropdownMenu key={link.title} title={link.title} links={verkaufLinks} />;
+            } else if (link.title === 'Mehr') {
+              return <DropdownMenu key={link.title} title={link.title} links={moreLinks} />;
+            } else {
+             return (
+                <li key={link.title}>
                   <Link href={link.path} className="text-gray-600 hover:text-gray-900 transition-colors">
-                  {link.title}
+                    {link.title}
                   </Link>
-                </div>
-                
-                <ul className="hidden peer-hover:flex hover:flex
-                  w-[200px] flex-col bg-white drop-shadow-lg absolute">
-                  <li className="px-5 py-3 hover:bg-gray-200"><Link href="/Immobilien/Eigentumswohnungen">Eigentumswohnungen</Link></li>
-                  <li className="px-5 py-3 hover:bg-gray-200"><Link href="/Immobilien/Einfamilienhaeuser">Einfamilienhäuser</Link></li>
-                  <li className="px-5 py-3 hover:bg-gray-200"><Link href="/Immobilien/Wohn-undGeschaeftshaeuser">Wohn- und Geschäftshäuser</Link></li>
-                  <li className="px-5 py-3 hover:bg-gray-200"><Link href="/Immobilien/Gewerbeimmobilien">Gewerbeimmobilien</Link></li>
-                </ul>
-              </li>
-            ) : (
-              <li key={link.title}>
-                <Link href={link.path} className="text-gray-600 hover:text-gray-900 transition-colors">
-                  {link.title}
-                </Link>
-              </li>
-            )  
-          ))}
+                </li>
+              );
+          }
+        })}
         </ul>
       </nav>
     </header>
