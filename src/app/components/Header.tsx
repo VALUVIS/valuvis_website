@@ -41,8 +41,8 @@ const moreLinks: NavLink[] = [
 
 const Header: React.FC = () => {
   return (
-    <header className="flex gap-20 items-start p-4 shadow-md bg-neutral-50">
-      <div className="logo flex-shrink-0">
+    <header className="flex gap-8 md:gap-14 lg:gap-20 p-4 shadow-md bg-neutral-50">
+      <div className="logo flex flex-shrink-0 items-center">
         <Image
             src="/logos/VA-Logo.png" 
             alt="Valuvis Logo"
@@ -50,8 +50,8 @@ const Header: React.FC = () => {
             height={22}
             layout='fixed' />
       </div>
-      <nav className="flex-grow">
-        <ul className="flex flex-wrap space-x-8">
+      <nav>
+        <ul className="flex items-start gap-4 md:gap-6 lg:gap-8">
           {navigationLinks.map((link) => {
             if (link.title === 'Immobilien kaufen') {
               return <DropdownMenu key={link.title} title={link.title} path={link.path} links={kaufLinks} />;
@@ -62,7 +62,7 @@ const Header: React.FC = () => {
             } else {
              return (
                 <li key={link.title}>
-                  <Link href={link.path} className="text-gray-600 hover:text-gray-900 transition-colors">
+                  <Link href={link.path} className="text-gray-600 hover:text-gray-900 transition-colors text-xs md:text-sm lg:text-base">
                     {link.title}
                   </Link>
                 </li>
