@@ -38,10 +38,10 @@ export default function UeberValuvis() {
   return (
     <div className='flex flex-col gap-16 mr-5 ml-5 mt-10 mb-10'>
       <section className='bg-neutral-50 flex flex-row p-20 gap-16 rounded-lg'>
-        <h1 className='text-4xl tracking-widest leading-normal'>Willkommen bei Valuvis Immobilien</h1>
-        <div className='flex flex-col gap-4 pr-18 pl-18'>
-          <p className='font-medium tracking-widest' >Als Ihr Partner in allen Immobilienangelegenheiten streben wir danach, Ihre Erwartungen zu übertreffen und Ihre Ziele Wirklichkeit werden zu lassen.</p>
-          <p className='tracking-widest font-thin'>Valuvis Immobilien ist Ihr vertrauenswürdiger Immobilienmakler in Frankfurt am Main. Unter der Leitung von Maximilian Rücker sind wir stolz darauf, unseren Kunden eine breite Palette an maßgeschneiderten Immobiliendienstleistungen anbieten zu können. Unser erfahrenes Team ist stets bereit, Sie bei jedem Schritt Ihres Immobilienprozesses zu unterstützen, sei es beim Kauf, Verkauf oder der Vermietung von Immobilien. Mit unserer tiefen Marktkenntnis und unserem Engagement für Exzellenz sind wir bestrebt, Ihre Immobilienziele zu verwirklichen.</p>
+        <h1 className='text-xl md:text-2xl lg:text-3xl tracking-widest leading-normal'>Willkommen bei Valuvis Immobilien</h1>
+        <div className='flex flex-col gap-4 pr-14 pl-14 md:pr-16 md:pl-16 lg:pr-18 lg:pl-18'>
+          <p className='text-xs md:text-s lg:text-base font-medium tracking-widest' >Als Ihr Partner in allen Immobilienangelegenheiten streben wir danach, Ihre Erwartungen zu übertreffen und Ihre Ziele Wirklichkeit werden zu lassen.</p>
+          <p className='text-xs md:text-s lg:text-base tracking-widest font-thin'>Valuvis Immobilien ist Ihr vertrauenswürdiger Immobilienmakler in Frankfurt am Main. Unter der Leitung von Maximilian Rücker sind wir stolz darauf, unseren Kunden eine breite Palette an maßgeschneiderten Immobiliendienstleistungen anbieten zu können. Unser erfahrenes Team ist stets bereit, Sie bei jedem Schritt Ihres Immobilienprozesses zu unterstützen, sei es beim Kauf, Verkauf oder der Vermietung von Immobilien. Mit unserer tiefen Marktkenntnis und unserem Engagement für Exzellenz sind wir bestrebt, Ihre Immobilienziele zu verwirklichen.</p>
         </div>
       </section>
 
