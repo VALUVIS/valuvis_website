@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import HeaderSection from '../components/HeaderSection';
 
 interface Stadtteil {
@@ -10,85 +11,85 @@ interface Stadtteil {
 
 const stadtteile: Stadtteil[] = [
   {
-    bild: '/pfad-zum-bild/altstadt.jpg',
+    bild: '/images/FrankfurtCity.jpg',
     titel: 'Altstadt',
     beschreibung: 'Ein historisches Juwel im Herzen von Frankfurt',
     link: '/altstadt'
   },
   {
-    bild: '/pfad-zum-bild/bockenheim.jpg',
+    bild: '/images/FrankfurtCity.jpg',
     titel: 'Bockenheim',
     beschreibung: 'Ein Stadtteil mit dynamischem Wachstum und hohem Potenzial',
     link: '/bockenheim'
   },
   {
-    bild: '/pfad-zum-bild/bornheim.jpg',
+    bild: '/images/FrankfurtCity.jpg',
     titel: 'Bornheim',
     beschreibung: 'Ein Stadtteil mit Charme und hoher Lebensqualität',
     link: '/bornheim'
   },
   {
-    bild: '/pfad-zum-bild/dornbusch.jpg',
+    bild: '/images/FrankfurtCity.jpg',
     titel: 'Dornbusch',
     beschreibung: 'Ein Stadtteil mit Charme und hohem Wohnkomfort',
     link: '/dornbusch'
   },
   {
-    bild: '/pfad-zum-bild/gallus.jpg',
+    bild: '/images/FrankfurtCity.jpg',
     titel: 'Gallus',
     beschreibung: 'Ein Stadtteil mit vielfältigem Charme und hohem Potenzial',
     link: '/gallus'
   },
   {
-    bild: '/pfad-zum-bild/griesheim.jpg',
+    bild: '/images/FrankfurtCity.jpg',
     titel: 'Griesheim',
     beschreibung: 'Ein Stadtteil mit starker Gemeinschaft und hohem Wohnkomfort',
     link: '/griesheim'
   },
   {
-    bild: '/pfad-zum-bild/innenstadt.jpg',
+    bild: '/images/FrankfurtCity.jpg',
     titel: 'Innenstadt',
     beschreibung: 'Im Herzen von Frankfurt',
     link: '/innenstadt'
   },
   {
-    bild: '/pfad-zum-bild/kalbach-riedberg.jpg',
+    bild: '/images/FrankfurtCity.jpg',
     titel: 'Kalbach-Riedberg',
     beschreibung: 'Ein aufstrebender Stadtteil mit hohem Wohnkomfort',
     link: '/kalbach-riedberg'
   },
   {
-    bild: '/pfad-zum-bild/nied.jpg',
+    bild: '/images/FrankfurtCity.jpg',
     titel: 'Nied',
     beschreibung: 'Ein Stadtteil mit Charme und hohem Wohnkomfort',
     link: '/nied'
   },
   {
-    bild: '/pfad-zum-bild/niederrad.jpg',
+    bild: '/images/FrankfurtCity.jpg',
     titel: 'Niederrad',
     beschreibung: 'Ein aufstrebender Stadtteil mit hervorragenden Immobilieninvestitionsmöglichkeiten',
     link: '/niederrad'
   },
   {
-    bild: '/pfad-zum-bild/nordend.jpg',
+    bild: '/images/FrankfurtCity.jpg',
     titel: 'Nordend',
     beschreibung: 'Ein lebendiger Stadtteil mit hoher Wohnqualität',
     link: '/nordend'
   },
   {
-    bild: '/pfad-zum-bild/ostend.jpg',
+    bild: '/images/FrankfurtCity.jpg',
     titel: 'Ostend',
     beschreibung: 'Ein dynamischer Stadtteil mit einer reichen Geschichte und einem lebendigen Immobilienmarkt',
     link: '/ostend'
   },
   {
-    bild: '/pfad-zum-bild/roedelheim.jpg',
+    bild: '/images/FrankfurtCity.jpg',
     titel: 'Rödelheim',
     beschreibung: 'Ein Stadtteil mit Potenzial und hohem Wohnkomfort',
     link: '/roedelheim'
   },
   {
-    bild: '/pfad-zum-bild/sachsenhausen-nord.jpg',
+    bild: '/images/FrankfurtCity.jpg',
     titel: 'Sachsenhausen-Nord',
     beschreibung: 'Ein Stadtteil mit historischem Charme und modernem Flair',
     link: '/sachsenhausen-nord'
@@ -100,13 +101,13 @@ const stadtteile: Stadtteil[] = [
     link: '/sachsenhausen-sued'
   },
   {
-    bild: '/pfad-zum-bild/schwanheim.jpg',
+    bild: '/images/FrankfurtCity.jpg',
     titel: 'Schwanheim',
     beschreibung: 'Ein Stadtteil mit Charme und hohem Wohnkomfort',
     link: '/schwanheim'
   },
   {
-    bild: '/pfad-zum-bild/westend.jpg',
+    bild: '/images/FrankfurtCity.jpg',
     titel: 'Westend',
     beschreibung: 'Zentral im Herzen von Europa',
     link: '/westend'
@@ -116,7 +117,13 @@ const stadtteile: Stadtteil[] = [
 // Komponente für eine einzelne Karte
 const StadtteilKarte: React.FC<Stadtteil> = ({ bild, titel, beschreibung, link }) => (
   <div className="shadow-lg rounded-lg overflow-hidden">
-    <img src={bild} alt={titel} />
+    <Image 
+      src={bild}
+      alt={titel}
+      width={1024}
+      height={1024}
+      layout='responsive' />
+
     <div className="p-4">
       <h3 className="text-sm md:text-base lg:text-lg tracking-widest leading-normal">{titel}</h3>
       <p className='text-xs md:text-s lg:text-base tracking-widest font-thin'>{beschreibung}</p>
