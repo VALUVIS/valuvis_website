@@ -18,6 +18,9 @@ const config: Config = {
         '21': '6.5rem',
         '22': '7rem',
       },
+      fontSize: {
+        'xxs': '.625rem',
+      },
     },
   },
   plugins: [],
