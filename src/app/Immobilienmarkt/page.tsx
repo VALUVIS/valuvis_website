@@ -1,4 +1,5 @@
 import React from 'react';
+import HeaderSection from '../components/HeaderSection';
 
 interface Stadtteil {
   bild: string;
@@ -93,7 +94,7 @@ const stadtteile: Stadtteil[] = [
     link: '/sachsenhausen-nord'
   },
   {
-    bild: '/pfad-zum-bild/sachsenhausen-sued.jpg',
+    bild: '/images/FrankfurtCity.jpg',
     titel: 'Sachsenhausen-Süd',
     beschreibung: 'Ein Juwel in Frankfurt',
     link: '/sachsenhausen-sued'
@@ -127,24 +128,20 @@ const StadtteilKarte: React.FC<Stadtteil> = ({ bild, titel, beschreibung, link }
 export default function Immobilienmarkt() {
   return (
     <div className='flex flex-col gap-16 mr-5 ml-5 mt-10 mb-10'>
-      <section className='bg-neutral-50 flex flex-row p-20 gap-8 md:gap-12 lg:gap-16 rounded-lg'>
-        <div className='flex flex-col gap-4'>
-          <h1 className='text-xl md:text-2xl lg:text-3xl tracking-widest leading-normal'>Frankfurter Immobilienmarkt</h1>
-          <h3 className='text-xs md:text-sm lg:text-base tracking-widest leading-normal'>In der pulsierenden Metropole Frankfurt am Main trifft Innovation auf Tradition.</h3>
-        </div>
-        
-        <div className='flex flex-col gap-4 pr-14 pl-14 md:pr-16 md:pl-16 lg:pr-18 lg:pl-18'>
-          <p className='text-xs md:text-s lg:text-base tracking-widest font-thin'>Als eine der führenden Finanzstädte Europas und ein wichtiger Knotenpunkt für Handel und Kultur, bietet Frankfurt eine dynamische und vielfältige Immobilienlandschaft.</p>
-          <p className='text-xs md:text-s lg:text-base tracking-widest font-thin'>Auf den folgenden Seiten finden Sie detaillierte Informationen über den Immobilienmarkt in den verschiedenen Stadtteilen von Frankfurt. Jeder Stadtteil hat seine eigene einzigartige Atmosphäre und bietet unterschiedliche Möglichkeiten für Käufer und Verkäufer. Wir laden Sie ein, mehr über diese faszinierenden Orte zu erfahren und zu entdecken, was sie zu bieten haben.</p>
-          <p className='text-xs md:text-s lg:text-base tracking-widest font-thin'>Begleiten Sie uns auf dieser Reise durch den Immobilienmarkt in Frankfurt am Main und entdecken Sie die vielfältigen Möglichkeiten, die diese Stadt zu bieten hat. Mit Valuvis Immobilien an Ihrer Seite haben Sie einen vertrauenswürdigen Partner, der Sie bei jedem Schritt unterstützt.</p>
-        </div>
-      </section>
+
+      <HeaderSection
+        title="Frankfurter Immobilienmarkt"
+        subtitle="In der pulsierenden Metropole Frankfurt am Main trifft Innovation auf Tradition."
+        content='Als eine der führenden Finanzstädte Europas und ein wichtiger Knotenpunkt für Handel und Kultur, bietet Frankfurt eine dynamische und vielfältige Immobilienlandschaft.
+                Auf den folgenden Seiten finden Sie detaillierte Informationen über den Immobilienmarkt in den verschiedenen Stadtteilen von Frankfurt. Jeder Stadtteil hat seine eigene einzigartige Atmosphäre und bietet unterschiedliche Möglichkeiten für Käufer und Verkäufer. Wir laden Sie ein, mehr über diese faszinierenden Orte zu erfahren und zu entdecken, was sie zu bieten haben.
+                Begleiten Sie uns auf dieser Reise durch den Immobilienmarkt in Frankfurt am Main und entdecken Sie die vielfältigen Möglichkeiten, die diese Stadt zu bieten hat. Mit Valuvis Immobilien an Ihrer Seite haben Sie einen vertrauenswürdigen Partner, der Sie bei jedem Schritt unterstützt.'
+      /> 
 
       <section className="bg-neutral-50 grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 lg:gap-16 rounded-lg p-20">
         {stadtteile.map((stadtteil, index) => (
           <StadtteilKarte key={index} {...stadtteil} />
         ))}
-    </section>
+      </section>
     </div>
   );
 }
