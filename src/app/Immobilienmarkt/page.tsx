@@ -124,7 +124,7 @@ const StadtteilKarte: React.FC<Stadtteil> = ({ bild, titel, beschreibung, link }
       height={1024}
       layout='responsive' />
 
-    <div className="p-4">
+    <div className="flex flex-col p-4 gap-2 md:gap-3 lg:gap-4">
       <h3 className="text-sm md:text-base lg:text-lg tracking-widest leading-normal">{titel}</h3>
       <p className='text-xs md:text-s lg:text-base tracking-widest font-thin'>{beschreibung}</p>
       <a href={link} className="text-orange-500 hover:underline text-xs md:text-s lg:text-base tracking-widest">Mehr Erfahren</a>
