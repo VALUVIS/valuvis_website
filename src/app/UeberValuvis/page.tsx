@@ -38,7 +38,7 @@ const services = [
 
 export default function UeberValuvis() {
   return (
-    <div className='flex flex-col gap-16 mr-5 ml-5 mt-10 mb-10'>
+    <div className='flex flex-col gap-16 m-5'>
 
       <HeaderSection
         title="Willkommen bei Valuvis Immobilien"
