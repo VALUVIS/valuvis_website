@@ -1,5 +1,5 @@
 import React from 'react';
-import Link from 'next/link';
+import KontaktFormular from '../components/KontaktFormular';
 
 export default function Kontakt() {
   return (
@@ -9,9 +9,7 @@ export default function Kontakt() {
           <h2 className='text-xl md:text-2xl lg:text-3xl tracking-widest leading-normal'>Kontakt</h2>
           <p className='text-xs md:text-s lg:text-base tracking-widest'>Schreiben Sie uns Ihr Anliegen und wir melden uns bei Ihnen innerhalb von 1 - 2 Werktagen zurück.</p>
         </div>
-        <div className='flex flex-col gap-4 md:gap-6 lg:gap-8 flex-1'>
-
-        </div>
+        <KontaktFormular />
       </section>
     </div>
   );
