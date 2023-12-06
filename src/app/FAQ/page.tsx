@@ -56,7 +56,7 @@ export default function FAQ() {
 ];
 
   return (
-    <div className='flex flex-col gap-16 mr-5 ml-5 mt-10 mb-10'>
+    <div className='flex flex-col gap-16 m-5'>
       <section className='bg-neutral-50 flex flex-col  p-10 md:p-15 lg:p-20 gap-8 md:gap-10 lg:gap-16 rounded-lg'>
         <h2 className='text-xl md:text-2xl lg:text-3xl'>Frequently Asked Questions</h2>
         <div className='flex flex-col gap-4 md:gap-8 lg:gap-10'>

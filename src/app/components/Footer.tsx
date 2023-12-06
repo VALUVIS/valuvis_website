@@ -27,7 +27,7 @@ const navigationLinks: NavLink[] = [
 
 const Footer: React.FC = () => {
   return (
-    <footer className="flex flex-col gap-16 justify-between bg-gray-200 p-10 pl-40 pr-40 text-sm">
+    <footer className="flex flex-col gap-16 justify-between bg-gray-200 p-10 md:pl-30 lg:pl-40 md:pr-30 lg:pr-40 text-sm">
         <div className="flex flex-wrap justify-between gap-16">
             <div className="flex flex-col space-y-4">
                 <Image

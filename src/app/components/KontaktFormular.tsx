@@ -99,7 +99,7 @@ const KontaktFormular: React.FC = () => {
             />
         </div>
         
-        <button type="submit" className='border border-orange-500 text-orange-500 rounded-lg pr-3 pl-3 pt-2 pb-2 hover:bg-orange-500 hover:text-white'>ABSENDEN</button>
+        <button type="submit" className='border border-orange-500 text-orange-500 rounded-lg pr-4 pl-4 pt-2 pb-2 hover:bg-orange-500 hover:text-white'>ABSENDEN</button>
     </form>
   );
 };

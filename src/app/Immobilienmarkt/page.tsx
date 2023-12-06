@@ -134,7 +134,7 @@ const StadtteilKarte: React.FC<Stadtteil> = ({ bild, titel, beschreibung, link }
 
 export default function Immobilienmarkt() {
   return (
-    <div className='flex flex-col gap-16 mr-5 ml-5 mt-10 mb-10'>
+    <div className='flex flex-col gap-16 m-5'>
 
       <HeaderSection
         title="Frankfurter Immobilienmarkt"

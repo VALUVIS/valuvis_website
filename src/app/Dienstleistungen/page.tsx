@@ -52,7 +52,7 @@ const services = [
 
 export default function Dienstleistungen() {
   return (
-    <div className='flex flex-col gap-16 mr-5 ml-5 mt-10 mb-10'>
+    <div className='flex flex-col gap-16 m-5'>
 
       <HeaderSection
         title="Premium Immobilienservices in Frankfurt - Valuvis Immobilien"
