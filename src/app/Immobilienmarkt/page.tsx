@@ -1,4 +1,5 @@
-import React from 'react';
+'use client';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import HeaderSection from '../components/HeaderSection';
 
@@ -132,17 +133,37 @@ const StadtteilKarte: React.FC<Stadtteil> = ({ bild, titel, beschreibung, link }
   </div>
 );
 
-export default function Immobilienmarkt() {
+const Immobilienmarkt = () => {
+  const [texts, setTexts] = useState<{ TextContent: string; Subtitle: string; Title: string; }[]>([]);
+
+  useEffect(() => {
+    const fetchTexts = async () => {
+      const reqOptions = {
+        headers: {
+          Authorization: `Bearer ${process.env.NEXT_PUBLIC_STRAPI_API_KEY}`
+        }
+      };
+    
+      const request = await fetch(`http://localhost:1337/api/texts`, reqOptions);
+      
+      const response = await request.json();
+      const texts = response.data.map((item: { attributes: any; }) => item.attributes);
+      setTexts(texts);
+    };
+
+    fetchTexts();
+  }, []);
+
   return (
     <div className='flex flex-col gap-16 m-5'>
 
-      <HeaderSection
-        title="Frankfurter Immobilienmarkt"
-        subtitle="In der pulsierenden Metropole Frankfurt am Main trifft Innovation auf Tradition."
-        content='Als eine der führenden Finanzstädte Europas und ein wichtiger Knotenpunkt für Handel und Kultur, bietet Frankfurt eine dynamische und vielfältige Immobilienlandschaft.
-                Auf den folgenden Seiten finden Sie detaillierte Informationen über den Immobilienmarkt in den verschiedenen Stadtteilen von Frankfurt. Jeder Stadtteil hat seine eigene einzigartige Atmosphäre und bietet unterschiedliche Möglichkeiten für Käufer und Verkäufer. Wir laden Sie ein, mehr über diese faszinierenden Orte zu erfahren und zu entdecken, was sie zu bieten haben.
-                Begleiten Sie uns auf dieser Reise durch den Immobilienmarkt in Frankfurt am Main und entdecken Sie die vielfältigen Möglichkeiten, die diese Stadt zu bieten hat. Mit Valuvis Immobilien an Ihrer Seite haben Sie einen vertrauenswürdigen Partner, der Sie bei jedem Schritt unterstützt.'
-      /> 
+      {texts && texts.map((text: { TextContent: string; Subtitle: string; Title: string}) => (
+        <HeaderSection
+          title={text.Title}
+          subtitle={text.Subtitle}
+          content={text.TextContent}
+        />
+      ))}
 
       <section className="bg-neutral-50 grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 lg:gap-16 rounded-lg p-20">
         {stadtteile.map((stadtteil, index) => (
@@ -152,3 +173,5 @@ export default function Immobilienmarkt() {
     </div>
   );
 }
+
+export default Immobilienmarkt;
