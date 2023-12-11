@@ -52,7 +52,7 @@ const NewsletterForm: React.FC = () => {
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="flex gap-2 text-xs md:text-s lg:text-base" id="propstack-form">
+      <form onSubmit={handleSubmit} className="flex flex-col md:flex-row gap-2 text-xs md:text-s lg:text-base" id="propstack-form">
         <input
           type="email"
           name="email"

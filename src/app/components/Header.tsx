@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import React from 'react';
 import DropdownMenu from './DropdownMenu';
 import MobileMenu from './MobileMenu';
@@ -44,6 +44,15 @@ const moreLinks: NavLink[] = [
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    setIsMobile(window.innerWidth <= 767);
+  }, []);
+
+  const handleCloseMenu = () => {
+    setIsMenuOpen(false);
+  };
 
   return (
     <>
@@ -52,8 +61,8 @@ const Header: React.FC = () => {
           <Image
               src="/logos/VA-Logo.png" 
               alt="Valuvis Logo"
-              width={30}
-              height={22}
+              width={isMobile ? 20 : 30}
+              height={isMobile ? 15 : 22}
               layout='fixed' />
         </div>
         <nav>
@@ -89,7 +98,7 @@ const Header: React.FC = () => {
           </svg>
         </button>
       </header>
-      <MobileMenu isOpen={isMenuOpen} navigationLinks={navigationLinks} />
+      <MobileMenu isOpen={isMenuOpen} onClose={handleCloseMenu} navigationLinks={navigationLinks} />
     </>
   );
 };
