@@ -3,6 +3,8 @@ import React, {useState} from 'react';
 
 const NewsletterForm: React.FC = () => {
   const [modalContent, setModalContent] = useState<string | null>(null);
+  const [agreedToPrivacy, setAgreedToPrivacy] = useState(false);
+  const [email, setEmail] = useState('');
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -32,6 +34,7 @@ const NewsletterForm: React.FC = () => {
 
       if (response.ok) {
         setModalContent('Vielen Dank für Ihre Anmeldung zum Newsletter!');
+        setAgreedToPrivacy(false);
       } else {
         setModalContent('Es gab ein Problem bei der Anmeldung. Bitte versuchen Sie es später erneut.');
       }
@@ -42,7 +45,7 @@ const NewsletterForm: React.FC = () => {
   };
 
   return (
-    <div className="mt-0">
+    <div className="mt-0 flex flex-col gap-4">
       {modalContent && (
         <div className="modal fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
           <div className="modal-content bg-white border-orange-500 border-2 rounded shadow-lg p-8 md:p-10 lg:p-12 m-4 max-w-xs md:max-w-3xl relative">
@@ -58,11 +61,30 @@ const NewsletterForm: React.FC = () => {
           name="email"
           placeholder="E-Mail Adresse"
           className="border pr-7 pl-3 pt-2 pb-2 rounded-lg"
+          required
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
-        <button type="submit" className="bg-orange-500 text-white pr-3 pl-3 pt-2 pb-2 rounded-lg hover:bg-gray-200 hover:text-orange-500 border border-orange-500">
+        <button 
+          type="submit" 
+          disabled={!agreedToPrivacy} 
+          className={`bg-orange-500 text-white pr-3 pl-3 pt-2 pb-2 rounded-lg hover:bg-gray-200 hover:text-orange-500 border border-orange-500 ${!agreedToPrivacy ? 'opacity-50 cursor-not-allowed' : ''}`}
+        >
           Abonnieren
         </button>
       </form>
+      <label className="inline-flex items-center">
+          <input
+            type="checkbox"
+            checked={agreedToPrivacy}
+            required
+            className="form-checkbox h-3 w-3 lg:h-4 lg:w-4"
+            onChange={(e) => setAgreedToPrivacy(e.target.checked)}
+          />
+          <span className={`ml-2 ${agreedToPrivacy ? 'text-gray-500' : 'text-red-500'}`}>
+            Ich stimme den Datenschutzbestimmungen zu *
+          </span>
+      </label>
     </div>
   );
 };
