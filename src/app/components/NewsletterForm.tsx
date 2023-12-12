@@ -42,12 +42,12 @@ const NewsletterForm: React.FC = () => {
   };
 
   return (
-    <>
+    <div className="mt-0">
       {modalContent && (
-        <div className="modal">
-          <div className="modal-content">
-            <span className="close-button" onClick={() => setModalContent(null)}>&times;</span>
-            <p>{modalContent}</p>
+        <div className="modal fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="modal-content bg-white border-orange-500 border-2 rounded shadow-lg p-8 md:p-10 lg:p-12 m-4 max-w-xs md:max-w-3xl relative">
+            <span className="close-button absolute top-2 right-4 text-lg md:text-xl lg:text-2xl cursor-pointer" onClick={() => setModalContent(null)}>&times;</span>
+            <p className="text-center text-sm md:text-base lg:text-lg">{modalContent}</p>
           </div>
         </div>
       )}
@@ -63,7 +63,7 @@ const NewsletterForm: React.FC = () => {
           Abonnieren
         </button>
       </form>
-    </>
+    </div>
   );
 };
 

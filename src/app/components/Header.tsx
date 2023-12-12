@@ -44,11 +44,6 @@ const moreLinks: NavLink[] = [
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    setIsMobile(window.innerWidth <= 767);
-  }, []);
 
   const handleCloseMenu = () => {
     setIsMenuOpen(false);
@@ -61,12 +56,13 @@ const Header: React.FC = () => {
           <Image
               src="/logos/VA-Logo.png" 
               alt="Valuvis Logo"
-              width={isMobile ? 20 : 30}
-              height={isMobile ? 15 : 22}
-              layout='fixed' />
+              width={30}
+              height={22}
+              layout='fixed'
+              className="w-6 md:w-8 lg:w-10" />
         </div>
         <nav>
-          <ul className="hidden md:flex items-start gap-4 md:gap-6 lg:gap-8">
+          <ul className="hidden md:flex items-center gap-4 md:gap-6 lg:gap-8">
             {navigationLinks.map((link) => {
               if (link.title === 'Immobilien kaufen') {
                 return <DropdownMenu key={link.title} title={link.title} path={link.path} links={kaufLinks} />;
