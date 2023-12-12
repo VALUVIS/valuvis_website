@@ -36,6 +36,7 @@ const Footer: React.FC = () => {
                     width={50}
                     height={37}
                     layout='fixed'
+                    className="w-6 md:w-8 lg:w-10"
                 />
                 <div className="text-xs md:text-s lg:text-base text-center mt-10">
                     Valuvis Immobilien e.K.
