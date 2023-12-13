@@ -55,7 +55,7 @@ const NewsletterForm: React.FC = () => {
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="flex flex-col md:flex-row gap-2 text-xs md:text-s lg:text-base" id="propstack-form">
+      <form onSubmit={handleSubmit} className="flex flex-col items-start md:flex-row gap-2 text-xs md:text-s lg:text-base" id="propstack-form">
         <input
           type="email"
           name="email"
@@ -73,7 +73,7 @@ const NewsletterForm: React.FC = () => {
           Abonnieren
         </button>
       </form>
-      <label className="inline-flex items-center">
+      <label className="inline-flex items-center text-xs md:text-s lg:text-base">
           <input
             type="checkbox"
             checked={agreedToPrivacy}

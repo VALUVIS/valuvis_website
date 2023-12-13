@@ -62,7 +62,7 @@ const Header: React.FC = () => {
               className="w-6 md:w-8 lg:w-10" />
         </div>
         <nav>
-          <ul className="hidden md:flex items-center gap-4 md:gap-6 lg:gap-8">
+          <ul className="md:flex items-center gap-4 md:gap-6 lg:gap-8">
             {navigationLinks.map((link) => {
               if (link.title === 'Immobilien kaufen') {
                 return <DropdownMenu key={link.title} title={link.title} path={link.path} links={kaufLinks} />;
