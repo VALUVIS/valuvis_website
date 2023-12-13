@@ -1,12 +1,10 @@
 import React from 'react';
-import Link from 'next/link';
+import BewertungSection from '../components/Bewertung/BewertungSection';
 
 export default function ImmobilienVerkaufen() {
   return (
-    <div>
-      <h1>Immobilien verkaufen</h1>
-      <p>Hier ist etwas Text über Immobilien verkaufen.</p>
-      <Link href="/">Zurück zur Startseite</Link>
+    <div className='grid place-items-center gap-16 m-5'>
+        <BewertungSection object = 'Hauptseite' />
     </div>
   );
 }
