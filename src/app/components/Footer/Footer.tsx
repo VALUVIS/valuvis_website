@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import React from 'react';
-import LinkedinIcon from './Icons/LinkedinIcon';
-import FacebookIcon from './Icons/FacebookIcon';
+import LinkedinIcon from '../Icons/LinkedinIcon';
+import FacebookIcon from '../Icons/FacebookIcon';
 import NewsletterForm from './NewsletterForm';
 
 type NavLink = {

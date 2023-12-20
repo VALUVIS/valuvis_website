@@ -29,10 +29,10 @@ const kaufLinks: NavLink[] = [
 ];
 
 const verkaufLinks: NavLink[] = [
-  { title: 'Eigentumswohnungen', path: '/Immobilien-verkaufen/Eigentumswohnungen' },
-  { title: 'Einfamilienhäuser', path: '/Immobilien-verkaufen/Einfamilienhaeuser' },
-  { title: 'Wohn- und Geschäftshäuser', path: '/Immobilien-verkaufen/Wohn-undGeschaeftshaeuser' },
-  { title: 'Gewerbeimmobilien', path: '/Immobilien-verkaufen/Gewerbeimmobilien' }
+  { title: 'Häuser', path: '/Immobilien-verkaufen/Haus-verkaufen' },
+  { title: 'Wohnungen', path: '/Immobilien-verkaufen/Wohnung-verkaufen' },
+  { title: 'Grundstücke', path: '/Immobilien-verkaufen/Grundstueck-verkaufen' },
+  { title: 'Gewerbeimmobilien', path: '/Immobilien-verkaufen/Gewerbeimmobilie-verkaufen' }
 ];
 
 const moreLinks: NavLink[] = [
@@ -51,7 +51,7 @@ const Header: React.FC = () => {
 
   return (
     <>
-      <header className="flex justify-between md:justify-start gap-8 md:gap-14 lg:gap-20 p-4 shadow-md bg-neutral-50">
+      <header className="flex items-stretch justify-between md:justify-start gap-8 md:gap-14 lg:gap-20 p-4 shadow-md bg-neutral-50">
         <div className="logo flex flex-shrink-0 items-center">
           <Image
               src="/logos/VA-Logo.png" 
@@ -61,27 +61,26 @@ const Header: React.FC = () => {
               layout='fixed'
               className="w-6 md:w-8 lg:w-10" />
         </div>
-        <nav>
-          <ul className="md:flex items-center gap-4 md:gap-6 lg:gap-8">
-            {navigationLinks.map((link) => {
-              if (link.title === 'Immobilien kaufen') {
-                return <DropdownMenu key={link.title} title={link.title} path={link.path} links={kaufLinks} />;
-              } else if (link.title === 'Immobilien verkaufen') {
-                return <DropdownMenu key={link.title} title={link.title} path={link.path} links={verkaufLinks} />;
-              } else if (link.title === 'Mehr') {
-                return <DropdownMenu key={link.title} title={link.title} path={link.path} links={moreLinks} />;
-              } else {
-              return (
-                  <li key={link.title}>
-                    <Link href={link.path} className="text-gray-600 hover:text-gray-900 transition-colors text-xs md:text-sm lg:text-base">
-                      {link.title}
-                    </Link>
-                  </li>
-                );
+        
+        <ul className="hidden md:flex items-center gap-4 md:gap-6 lg:gap-8 h-full">
+          {navigationLinks.map((link) => {
+            if (link.title === 'Immobilien kaufen') {
+              return <DropdownMenu key={link.title} title={link.title} path={link.path} links={kaufLinks} />;
+            } else if (link.title === 'Immobilien verkaufen') {
+              return <DropdownMenu key={link.title} title={link.title} path={link.path} links={verkaufLinks} />;
+            } else if (link.title === 'Mehr') {
+              return <DropdownMenu key={link.title} title={link.title} path={link.path} links={moreLinks} />;
+            } else {
+            return (
+                <li key={link.title}>
+                  <Link href={link.path} className="text-gray-600 hover:text-gray-900 transition-colors text-xs md:text-sm lg:text-base">
+                    {link.title}
+                  </Link>
+                </li>
+              );
             }
           })}
-          </ul>
-        </nav>
+        </ul>
         
         <button
           title='Menu'
@@ -94,7 +93,7 @@ const Header: React.FC = () => {
           </svg>
         </button>
       </header>
-      <MobileMenu isOpen={isMenuOpen} onClose={handleCloseMenu} navigationLinks={navigationLinks} />
+      <MobileMenu isOpen={isMenuOpen} onClose={handleCloseMenu} navigationLinks={navigationLinks} kaufLinks={kaufLinks} verkaufLinks={verkaufLinks} moreLinks={moreLinks} />
     </>
   );
 };

@@ -1,5 +1,6 @@
 'use client';
 import React, { useState } from 'react';
+import { apiCall } from '../utils/api';
 
 type KontaktFormularDaten = {
   vorname: string;
@@ -48,13 +49,7 @@ const KontaktFormular: React.FC = () => {
 
     // Senden der Anfrage an Propstack
     try {
-      const response = await fetch('https://api.propstack.de/v1/contacts', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-API-KEY': apiKey
-        },
-        body: JSON.stringify({
+      await apiCall('https://api.propstack.de/v1/contacts', 'POST', {
           client: {
             email: email,
             first_name: firstName,
@@ -63,25 +58,19 @@ const KontaktFormular: React.FC = () => {
             accept_contact: true,
             description: message,
             home_cell: telefon
-           }
-        })
+          }
       });
 
-      if (response.ok) {
-        setFormData({
+      setFormData({
           vorname: '',
           nachname: '',
           email: '',
           telefon: '',
           nachricht: '',
           agreedToPrivacy: false
-        });
-        
-        setModalContent('Vielen Dank für Ihre Nachricht! Wir werden uns in Kürze bei Ihnen über E-Mail melden.');
-      } else {
-        setModalContent('Es gab ein Problem bei der Übermittlung Ihrer Nachricht. Bitte versuchen Sie es später erneut.');
-      }
+      });
 
+      setModalContent('Vielen Dank für Ihre Nachricht! Wir werden uns in Kürze bei Ihnen über E-Mail melden.');
     } catch (error) {
       setModalContent('Ein Fehler ist aufgetreten. Bitte überprüfen Sie Ihre Netzwerkverbindung.');
     }
