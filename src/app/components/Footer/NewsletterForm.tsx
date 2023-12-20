@@ -1,5 +1,6 @@
 'use client';
 import React, {useState} from 'react';
+import { apiCall } from '../../utils/api';
 
 const NewsletterForm: React.FC = () => {
   const [modalContent, setModalContent] = useState<string | null>(null);
@@ -19,26 +20,15 @@ const NewsletterForm: React.FC = () => {
     
     // Senden der Anfrage an Propstack
     try {
-      const response = await fetch('https://api.propstack.de/v1/contacts', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-API-KEY': apiKey
-        },
-        body: JSON.stringify({
-           client: {
+      const response = await apiCall('https://api.propstack.de/v1/contacts', 'POST', {
+          client: {
             email: email,
-           }
-        })
+          }
       });
 
-      if (response.ok) {
-        setModalContent('Vielen Dank für Ihre Anmeldung zum Newsletter!');
-        setAgreedToPrivacy(false);
-      } else {
-        setModalContent('Es gab ein Problem bei der Anmeldung. Bitte versuchen Sie es später erneut.');
-      }
-
+      setModalContent('Vielen Dank für Ihre Anmeldung zum Newsletter!');
+      setAgreedToPrivacy(false);
+      setEmail('');
     } catch (error) {
       setModalContent('Ein Fehler ist aufgetreten. Bitte überprüfen Sie Ihre Netzwerkverbindung.');
     }

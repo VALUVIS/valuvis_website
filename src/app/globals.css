@@ -24,3 +24,25 @@ body {
   background: #E5E7EB;
   font-family: 'Roboto', sans-serif;
 }
+
+/* Slider von SliderSection */
+
+.slider::-webkit-slider-thumb {
+  @apply bg-orange-500;
+  @apply border-orange-500; 
+}
+
+.slider::-moz-range-thumb {
+  @apply bg-orange-500;
+  @apply border-orange-500; 
+}
+
+.slider::-webkit-slider-runnable-track {
+  @apply bg-orange-500;
+  height: 6px;
+}
+
+.slider::-moz-range-track {
+  @apply bg-orange-500;
+  height: 6px;
+}
