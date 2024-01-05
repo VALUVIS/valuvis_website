@@ -63,10 +63,10 @@ export default function UeberValuvis() {
       <section className='bg-neutral-50 grid grid-cols-1 md:grid-cols-3 p-14 gap-16 rounded-lg'>
         {services.map((service) => (
           <div key={service.number} className="space-y-4">
-            <h3 className="text-base md:text-lg lg:text-xl tracking-widest">
+            <h3 className="text-lg md:text-xl lg:text-2xl tracking-widest">
               <span className="text-orange-500 tracking-widest">{service.number}</span> {service.title}
             </h3>
-            <p className='text-xs md:text-s lg:text-base tracking-widest font-thin'>{service.description}</p>
+            <p className='text-sm md:text-base lg:text-lg tracking-widest font-thin'>{service.description}</p>
           </div>
         ))}
       </section>
@@ -79,13 +79,13 @@ export default function UeberValuvis() {
       />
 
       <section className='bg-neutral-50 flex flex-col p-10 md:p-15 lg:p-20 gap-8 md:gap-12 lg:gap-16 rounded-lg'>
-        <h1 className='text-xl md:text-2xl lg:text-3xl tracking-widest leading-normal'>Unser Team</h1>
+        <h1 className='text-2xl md:text-3xl lg:text-4xl tracking-widest leading-normal'>Unser Team</h1>
 
         <div className="flex flex-col-reverse md:flex-row border-t border-gray-400 mx-auto pt-14 gap-8 md:gap-12 lg:gap-16">
           <div className='flex flex-col pr-8 gap-4 md:gap-6 lg:gap-8 flex-1'>
-            <h6 className='text-xs md:text-s lg:text-base font-light tracking-widest'>Inhaber</h6>
-            <h2 className='text-lg md:text-xl lg:text-2xl tracking-widest'>Maximilian Rücker</h2>
-            <p className='text-xs md:text-s lg:text-base tracking-widest font-thin'>Mit einem Jahrzehnt Erfahrung in der Immobilienbranche, ist Maximilian ein vertrauenswürdiger Partner für vermögende Privatinvestoren. Sein Fokus liegt auf der Optimierung von Portfolios, wobei er einen ausgewogenen Cash Flow, Liquidität und Risikomanagement gewährleistet. Maximilian ist nicht nur ein erfahrener Immobilienexperte, sondern auch ein begeisterter Berater, der Sie beim Kauf, Verkauf und der Entwicklung Ihrer Immobilien unterstützt. Sein fundiertes Wissen basiert auf einem Studium des International Real Estate Managements an der Technischen Hochschule Aschaffenburg.</p>
+            <h6 className='text-sm md:text-base lg:text-lg font-light tracking-widest'>Inhaber</h6>
+            <h2 className='text-xl md:text-2xl lg:text-4xl tracking-widest'>Maximilian Rücker</h2>
+            <p className='text-sm md:text-base lg:text-xl tracking-widest font-thin'>Mit einem Jahrzehnt Erfahrung in der Immobilienbranche, ist Maximilian ein vertrauenswürdiger Partner für vermögende Privatinvestoren. Sein Fokus liegt auf der Optimierung von Portfolios, wobei er einen ausgewogenen Cash Flow, Liquidität und Risikomanagement gewährleistet. Maximilian ist nicht nur ein erfahrener Immobilienexperte, sondern auch ein begeisterter Berater, der Sie beim Kauf, Verkauf und der Entwicklung Ihrer Immobilien unterstützt. Sein fundiertes Wissen basiert auf einem Studium des International Real Estate Managements an der Technischen Hochschule Aschaffenburg.</p>
           </div>
           <div className='flex-1'>
             <Image

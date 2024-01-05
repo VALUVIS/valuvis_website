@@ -87,7 +87,7 @@ const KontaktFormular: React.FC = () => {
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className='flex flex-col items-center gap-4 md:gap-6 lg:gap-8 flex-1 text-xs md:text-s lg:text-base'>
+        <form onSubmit={handleSubmit} className='flex flex-col items-center gap-4 md:gap-6 lg:gap-8 text-sm md:text-xl lg:text-2xl'>
           <div className='flex justify-center gap-2 md:gap-3 lg:gap-4 w-full'>
               <div className="border-b border-gray-400 w-full flex-1">
                   <input
@@ -161,7 +161,7 @@ const KontaktFormular: React.FC = () => {
               className="form-checkbox h-3 w-3 lg:h-4 lg:w-4"
               onChange={(e) => setFormData({ ...formData, agreedToPrivacy: e.target.checked })}
             />
-            <span className={`ml-2 ${formData.agreedToPrivacy ? 'text-gray-400' : 'text-red-500'}`}>
+            <span className={`ml-2 text-sm md:text-lg lg:text-lg ${formData.agreedToPrivacy ? 'text-gray-400' : 'text-red-500'}`}>
               Ich stimme den Datenschutzbestimmungen zu *
             </span>
           </label>

@@ -29,7 +29,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, navigationLinks, onClos
     }
 
     return (
-        <div className={`absolute flex w-full h-full md:hidden bg-white overflow-y-hidden z-50 `}>
+        <div className={`absolute flex w-full h-full lg:hidden bg-white overflow-y-hidden z-50 `}>
           <ul className='flex flex-col gap-5 w-full pl-5'>
             {navigationLinks.map((link) => {
               if (link.title === 'Immobilien kaufen') {

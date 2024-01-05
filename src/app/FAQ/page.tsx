@@ -58,11 +58,11 @@ export default function FAQ() {
   return (
     <div className='flex flex-col gap-16 m-5'>
       <section className='bg-neutral-50 flex flex-col  p-10 md:p-15 lg:p-20 gap-8 md:gap-10 lg:gap-16 rounded-lg'>
-        <h2 className='text-xl md:text-2xl lg:text-3xl'>Frequently Asked Questions</h2>
-        <div className='flex flex-col gap-4 md:gap-8 lg:gap-10'>
+        <h2 className='text-2xl md:text-3xl lg:text-4xl'>Frequently Asked Questions</h2>
+        <div className='flex flex-col gap-10 md:gap-12 lg:gap-14 md:pl-10'>
           {faqs.map((faq, index) => (
           <FAQItem key={index} question={faq.question} answer={faq.answer} />
-        ))}
+          ))}
         </div>
         
       </section>

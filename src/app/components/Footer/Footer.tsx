@@ -27,7 +27,7 @@ const navigationLinks: NavLink[] = [
 
 const Footer: React.FC = () => {
   return (
-    <footer className="flex flex-col gap-16 justify-between bg-gray-200 p-10 md:pl-30 lg:pl-40 md:pr-30 lg:pr-40 text-sm">
+    <footer className="flex flex-col gap-16 justify-between bg-gray-200 p-10 md:pl-30 lg:pl-40 md:pr-30 lg:pr-40">
         <div className="flex flex-wrap justify-between gap-16">
             <div className="flex flex-col space-y-4">
                 <Image
@@ -36,9 +36,9 @@ const Footer: React.FC = () => {
                     width={50}
                     height={37}
                     layout='fixed'
-                    className="w-6 md:w-8 lg:w-10"
+                    className="w-8 md:w-10 lg:w-12"
                 />
-                <div className="text-xs md:text-s lg:text-base text-center mt-10">
+                <div className="text-sm md:text-base lg:text-lg text-center mt-10">
                     Valuvis Immobilien e.K.
                 </div>
             
@@ -48,7 +48,7 @@ const Footer: React.FC = () => {
                 <ul className="grid grid-cols-1 md:grid-cols-3 gap-y-4 gap-x-16">
                     {navigationLinks.map((link) => (
                         <li key={link.title}>
-                            <Link href={link.path} className="text-xs md:text-s lg:text-base text-gray-600 hover:text-gray-900 transition-colors">
+                            <Link href={link.path} className="text-sm md:text-base lg:text-lg text-gray-600 hover:text-gray-900 transition-colors">
                                 {link.title}
                             </Link>
                         </li>
@@ -63,10 +63,10 @@ const Footer: React.FC = () => {
         </div>
       
         <div className="flex flex-col space-y-4">
-            <h3 className="text-sm md:text-base lg:text-lg text-neutral-600">Newsletter abonnieren</h3>
+            <h3 className="text-base md:text-lg lg:text-xl text-neutral-600">Newsletter abonnieren</h3>
             <NewsletterForm />
         </div>
-        <div className="text-xxs md:text-xs lg:text-sm text-start mt-10 text-neutral-600">
+        <div className="text-xs md:text-sm lg:text-base text-start mt-10 text-neutral-600">
             © 2023 Valuvis Immobilien e.K.
         </div>
     </footer>

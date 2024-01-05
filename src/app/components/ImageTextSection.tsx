@@ -21,8 +21,8 @@ const ImageTextSection = ({ src, alt, title, content }: ImageTextSectionProps) =
       </div>
       
       <div className='flex flex-col gap-4 md:gap-8 lg:gap-10 pr-2 pl-2 md:pr-10 md:pl-10 lg:pr-16 lg:pl-16 flex-1'>
-        <h2 className='text-xl md:text-2xl lg:text-3xl tracking-widest leading-normal'>{title}</h2>
-        <p className='text-xs md:text-s lg:text-base tracking-widest font-thin'>{content}</p>
+        <h2 className='text-2xl md:text-3xl lg:text-4xl tracking-widest leading-normal'>{title}</h2>
+        <p className='text-sm md:text-base lg:text-xl tracking-widest font-thin'>{content}</p>
       </div>
     </section>
   );
