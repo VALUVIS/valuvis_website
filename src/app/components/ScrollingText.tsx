@@ -70,7 +70,10 @@ export default function ScrollingText() {
             className='relative w-screen h-screen flex flex-col items-center justify-start pt-20 md:pt-22 text-white text-2xl md:text-4xl lg:text-6xl whitespace-nowrap tracking-widest'
         >
             <span>Wir sind</span>
-            <span className='mt-2 h-5 sm:h-8 md:h-10 lg:h-20'>{currentText.slice(0, currentLetterIndex)}</span>
+            <span className='mt-2 h-5 sm:h-8 md:h-10 lg:h-20'>
+                {currentText.slice(0, currentLetterIndex)}
+                <span className="blinking-cursor">|</span>
+            </span>
             <span className='mt-10 text-lg md:text-2xl lg:text-4xl whitespace-normal text-center'>Der Wegweiser zu Premium-Immobilien in Frankfurt</span>
         </motion.div>
     );
