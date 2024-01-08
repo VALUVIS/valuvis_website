@@ -1,4 +1,5 @@
 'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
@@ -51,7 +52,7 @@ const Header: React.FC = () => {
 
   return (
     <>
-      <header className="flex items-center justify-between lg:justify-start gap-8 md:gap-14 lg:gap-20 p-5 shadow-md bg-neutral-50 text-base md:text-lg lg:text-xl">
+      <header className="flex items-center justify-between lg:justify-start gap-8 md:gap-14 lg:gap-20 p-4 shadow-md bg-neutral-50 text-sm md:text-base lg:text-base">
         <div className="logo flex flex-shrink-0 items-center">
           <Image
               src="/logos/VA-Logo.png" 
@@ -59,7 +60,7 @@ const Header: React.FC = () => {
               width={30}
               height={22}
               layout='fixed'
-              className="w-6 md:w-8 lg:w-10" />
+              className="w-4 md:w-6 lg:w-8" />
         </div>
         
         <ul className="hidden lg:flex items-center gap-4 md:gap-6 lg:gap-8 h-full">
@@ -73,7 +74,7 @@ const Header: React.FC = () => {
             } else {
             return (
                 <li key={link.title}>
-                  <Link href={link.path} className="text-gray-600 hover:text-gray-900 transition-colors text-lg md:text-xl lg:text-xl">
+                  <Link href={link.path} className="text-gray-600 hover:text-gray-900 transition-colors">
                     {link.title}
                   </Link>
                 </li>
