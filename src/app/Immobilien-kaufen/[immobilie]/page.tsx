@@ -50,39 +50,57 @@ const PropertyPage = () => {
     }, [id]);
 
     if (!property) {
-        return <div>Loading...</div>;
+        return (
+            <div className='grid place-items-center gap-16 m-5'>
+                <div className='bg-neutral-50 flex flex-col justify-center items-start w-full p-15 md:p-16 lg:p-20 gap-8 md:gap-10 lg:gap-16 rounded-lg'>
+                    <div className='h-6 w-full bg-gray-200 animate-pulse'></div>
+
+                    <div className='w-full h-20 bg-gray-200 animate-pulse'></div>
+
+                    <div className='h-6 w-full bg-gray-200 animate-pulse'></div>
+                    <div className="grid grid-flow-col auto-cols-auto gap-6 text-base md:text-lg lg:text-xl tracking-widest leading-normal">
+                        <div className='h-6 w-full bg-gray-200 animate-pulse'></div>
+                    </div>
+                    
+                </div>
+            </div>
+        );
     }
 
     return (
         <div className='grid place-items-center gap-16 m-5'>
-            <div className='bg-neutral-50 flex flex-col justify-center items-start w-full p-15 md:p-16 lg:p-20 gap-8 md:gap-10 lg:gap-16 rounded-lg' key={property.id}>
+            <div className='bg-neutral-50 flex flex-col justify-center items-start w-full p-14 md:p-16 lg:p-20 gap-8 md:gap-10 lg:gap-16 rounded-lg' key={property.id}>
                 <h2 className='text-xl md:text-2xl lg:text-3xl tracking-widest leading-normal'>{property.name}</h2>
                 
                 <div className="flex gap-8">
                     {property.images && property.images.slice(0, 1).map((image, index) => 
-                        <Image
-                            key={index}
-                            src={image.url}
-                            alt={`${property.name} image ${index + 1}`}
-                            width={600}
-                            height={600} 
-                            layout='fixed'
-                            className='cursor-pointer'
-                            onClick={handleOpenModal}
-                        />
-                    )}
-                    <div className="flex flex-col gap-4">
-                        {property.images && property.images.slice(1, 3).map((image, index) => 
+                        <div className="flex-1">
                             <Image
-                                key={index + 1}
+                                key={index}
                                 src={image.url}
-                                alt={`${property.name} image ${index + 2}`}
-                                width={300} 
-                                height={300} 
-                                layout='fixed'
+                                alt={`${property.name} image ${index + 1}`}
+                                width={600}
+                                height={600} 
+                                layout='responsive'
                                 className='cursor-pointer'
                                 onClick={handleOpenModal}
                             />
+                        </div>
+                    )}
+                    <div className="flex flex-col gap-4 flex-1">
+                        {property.images && property.images.slice(1, 3).map((image, index) => 
+                            <div className="flex-1">
+                                <Image
+                                    key={index + 1}
+                                    src={image.url}
+                                    alt={`${property.name} image ${index + 2}`}
+                                    width={300}
+                                    height={300} 
+                                    layout='responsive'
+                                    className='cursor-pointer'
+                                    onClick={handleOpenModal}
+                                />
+                            </div>
                         )}
                     </div>
                 </div>

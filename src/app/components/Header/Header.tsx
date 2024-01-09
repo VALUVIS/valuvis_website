@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import React from 'react';
+import { usePathname } from 'next/navigation';
 import DropdownMenu from './DropdownMenu';
 import MobileMenu from './MobileMenu';
 
@@ -44,15 +45,19 @@ const moreLinks: NavLink[] = [
 ];
 
 const Header: React.FC = () => {
+  const pathname = usePathname();
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleCloseMenu = () => {
     setIsMenuOpen(false);
   };
 
+  const isHomePage = pathname === '/';
+
   return (
     <>
-      <header className="flex items-center justify-between lg:justify-start gap-8 md:gap-14 lg:gap-20 p-4 shadow-md bg-neutral-50 text-sm md:text-base lg:text-base">
+      <header className={`flex items-center justify-between lg:justify-start gap-8 md:gap-14 lg:gap-20 p-4 shadow-md ${isHomePage ? 'bg-blue-900 text-white' : 'bg-neutral-50 text-gray-600'} text-sm md:text-base lg:text-base`}>
         <div className="logo flex flex-shrink-0 items-center">
           <Image
               src="/logos/VA-Logo.png" 
@@ -66,15 +71,15 @@ const Header: React.FC = () => {
         <ul className="hidden lg:flex items-center gap-4 md:gap-6 lg:gap-8 h-full">
           {navigationLinks.map((link) => {
             if (link.title === 'Immobilien kaufen') {
-              return <DropdownMenu key={link.title} title={link.title} path={link.path} links={kaufLinks} />;
+              return <DropdownMenu key={link.title} title={link.title} path={link.path} links={kaufLinks} isHomePage={isHomePage}/>;
             } else if (link.title === 'Immobilien verkaufen') {
-              return <DropdownMenu key={link.title} title={link.title} path={link.path} links={verkaufLinks} />;
+              return <DropdownMenu key={link.title} title={link.title} path={link.path} links={verkaufLinks} isHomePage={isHomePage} />;
             } else if (link.title === 'Mehr') {
-              return <DropdownMenu key={link.title} title={link.title} path={link.path} links={moreLinks} />;
+              return <DropdownMenu key={link.title} title={link.title} path={link.path} links={moreLinks} isHomePage={isHomePage} />;
             } else {
             return (
                 <li key={link.title}>
-                  <Link href={link.path} className="text-gray-600 hover:text-gray-900 transition-colors">
+                  <Link href={link.path} className="hover:text-gray-900 transition-colors">
                     {link.title}
                   </Link>
                 </li>
