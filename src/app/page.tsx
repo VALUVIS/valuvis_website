@@ -18,6 +18,8 @@ export default function Home() {
         </div>
         <ScrollingText />
       </section>
+      <section className='flex flex-col gap-16 m-5 h-[100vh]'>
+      </section>
     </main>
   )
 }
