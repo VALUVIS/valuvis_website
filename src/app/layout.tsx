@@ -21,9 +21,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="de"> 
-      <body className={`${roboto.className} m-0 max-w-full`}>
+      <body className={`${roboto.className} m-0 w-full`}>
         <Header />
-        <main className='min-h-screen'>
+        <main className='min-h-screen w-full'>
           {children}
         </main>
         <Footer />
