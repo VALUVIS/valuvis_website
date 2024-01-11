@@ -4,7 +4,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import React from 'react';
-import { usePathname } from 'next/navigation';
 import DropdownMenu from './DropdownMenu';
 import MobileMenu from './MobileMenu';
 
@@ -45,7 +44,6 @@ const moreLinks: NavLink[] = [
 ];
 
 const Header: React.FC = () => {
-  const pathname = usePathname();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -53,11 +51,9 @@ const Header: React.FC = () => {
     setIsMenuOpen(false);
   };
 
-  const isHomePage = pathname === '/';
-
   return (
     <>
-      <header className={`w-full flex items-center justify-between lg:justify-start gap-8 md:gap-14 lg:gap-20 p-4 shadow-md ${isHomePage ? 'bg-blue-900 text-white' : 'bg-neutral-50 text-gray-600'} text-sm md:text-base lg:text-base`}>
+      <header className={`fixed top-0 left-0 z-50 w-full flex items-center justify-between lg:justify-start gap-8 md:gap-14 lg:gap-20 p-4 shadow-md bg-transparent text-sm md:text-base lg:text-base backdrop-filter backdrop-blur-lg bg-opacity-30 bg-white`}>
         <div className="logo flex flex-shrink-0 items-center">
           <Image
               src="/logos/VA-Logo.png" 
@@ -71,11 +67,11 @@ const Header: React.FC = () => {
         <ul className="hidden lg:flex items-center gap-4 md:gap-6 lg:gap-8 h-full">
           {navigationLinks.map((link) => {
             if (link.title === 'Immobilien kaufen') {
-              return <DropdownMenu key={link.title} title={link.title} path={link.path} links={kaufLinks} isHomePage={isHomePage}/>;
+              return <DropdownMenu key={link.title} title={link.title} path={link.path} links={kaufLinks} />;
             } else if (link.title === 'Immobilien verkaufen') {
-              return <DropdownMenu key={link.title} title={link.title} path={link.path} links={verkaufLinks} isHomePage={isHomePage} />;
+              return <DropdownMenu key={link.title} title={link.title} path={link.path} links={verkaufLinks} />;
             } else if (link.title === 'Mehr') {
-              return <DropdownMenu key={link.title} title={link.title} path={link.path} links={moreLinks} isHomePage={isHomePage} />;
+              return <DropdownMenu key={link.title} title={link.title} path={link.path} links={moreLinks} />;
             } else {
             return (
                 <li key={link.title}>

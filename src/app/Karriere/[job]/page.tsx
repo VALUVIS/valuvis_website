@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react';
 import { getEntryBySlug } from '../../../lib/contentful/client';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { Document } from '@contentful/rich-text-types';
+import Link from 'next/link';
 
 type Field = {
     title: string;
@@ -47,12 +48,16 @@ export default function  JobPage()  {
             <section className='bg-neutral-50 flex flex-col items-center p-10 md:p-15 lg:p-20 rounded-lg gap-12'>
                 <div className='flex flex-col gap-4 md:gap-8 w-[80%] md:w-[60%]'>
 
-                    <div className='flex flex-col gap-2 md:gap-4 border-b-2 pb-10'>
+                    <div className='flex flex-col gap-6 md:gap-8 border-b-2 pb-10'>
                         <h2 className='text-xl md:text-2xl lg:text-3xl'>{data.fields.title}</h2>
                         <div id='richTextJobPage' className='flex flex-col gap-5'>
                             {documentToReactComponents(data.fields.content)}
                         </div>
                     </div>
+
+                    <Link href={'/Karriere/Bewerbung'} className='inline-block border border-orange-500 bg-transparent text-orange-500 hover:bg-orange-500 hover:text-white transition duration-300 py-2 px-4 rounded-2xl w-64'>
+                        Jetzt Initiativbewerbung senden
+                    </Link>
                 </div>
             </section>
         </div>

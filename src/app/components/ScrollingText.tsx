@@ -67,7 +67,7 @@ export default function ScrollingText() {
     return (
         <motion.div
             style={{ y: textY }} 
-            className='relative w-full h-screen flex flex-col items-center justify-start pt-20 md:pt-22 text-white text-2xl md:text-4xl lg:text-6xl whitespace-nowrap tracking-widest'
+            className='relative w-full h-screen flex flex-col items-center justify-center pb-20 text-white text-2xl md:text-4xl lg:text-6xl whitespace-nowrap tracking-widest'
         >
             <span>Wir sind</span>
             <span className='mt-2 h-5 sm:h-8 md:h-10 lg:h-20'>

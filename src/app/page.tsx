@@ -3,7 +3,7 @@ import ScrollingText from './components/ScrollingText';
 
 export default function Home() {
   return (
-    <main className="home flex flex-col gap-16 mb-20">
+    <main className="home flex flex-col gap-16">
       <section className='w-screen h-[120vh] relative'>
         <div 
           className='w-screen h-full absolute'

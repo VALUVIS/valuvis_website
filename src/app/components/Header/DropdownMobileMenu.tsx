@@ -14,14 +14,20 @@ const DropdownMobileMenu: React.FC<DropdownMobileMenuProps> = ({ title, path, li
     return (
         <li className="flex flex-col gap-4 border-b border-gray-200 w-full">
             <div className="flex justify-between items-center pr-5">
-                <Link 
-                    key={title}
-                    href={path}
-                    onClick={onClose}
-                    className="text-gray-600 hover:text-gray-900 transition-colors text-xs md:text-sm lg:text-base"
-                >
-                    {title}
-                </Link>
+                {title === 'Mehr' ? (
+                    <span className="text-gray-600 hover:text-gray-900 transition-colors text-xs md:text-sm lg:text-base">
+                        {title}
+                    </span>
+                ) : (
+                    <Link 
+                        key={title}
+                        href={path}
+                        onClick={onClose}
+                        className="text-gray-600 hover:text-gray-900 transition-colors text-xs md:text-sm lg:text-base"
+                    >
+                        {title}
+                    </Link>
+                )}
                 <button type='button' onClick={() => setIsOpen(!isOpen)} className="text-gray-600 hover:text-gray-900 transition-colors text-xs md:text-sm lg:text-base">
                     {isOpen ? '▲' : '▼'}
                 </button>

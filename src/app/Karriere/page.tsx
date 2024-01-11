@@ -46,9 +46,9 @@ export default function Karriere() {
       <section className='bg-neutral-50 flex flex-col p-10 md:p-15 lg:p-20 gap-8 md:gap-10 lg:gap-12 rounded-lg'>
         <h2 className='text-2xl md:text-3xl lg:text-4xl tracking-widest leading-normal'>Starten Sie Ihre Karriere bei Valuvis Immobilien</h2>
         <p className='text-sm md:text-base lg:text-xl tracking-widest font-thin'>Willkommen auf der Karriereseite von Valuvis Immobilien, dem Ort, an dem Immobilienträume Wirklichkeit werden. Wir sind ein dynamisches und innovatives Immobilienunternehmen, das sich auf den Verkauf und die Vermietung von Wohn- und Geschäftshäusern, Einfamilienhäusern, Eigentumswohnungen und Gewerbeimmobilien in Frankfurt am Main spezialisiert hat.</p>
-        <button type='button' className='inline-block border border-orange-500 bg-transparent text-orange-500 hover:bg-orange-500 hover:text-white transition duration-300 py-2 px-4 rounded-2xl w-64'>
+        <Link href={'/Karriere/Bewerbung'} className='inline-block border border-orange-500 bg-transparent text-orange-500 hover:bg-orange-500 hover:text-white transition duration-300 py-2 px-4 rounded-2xl w-64'>
           Jetzt Initiativbewerbung senden
-        </button>
+        </Link>
       </section>
 
       <section className='bg-neutral-50 flex flex-col p-10 md:p-15 lg:p-20 gap-8 md:gap-10 lg:gap-12 rounded-lg'>
@@ -72,9 +72,9 @@ export default function Karriere() {
 
           Bereit, den ersten Schritt zu machen? Ergreifen Sie die Initiative und bewerben Sie sich jetzt!
         </p>
-        <button type='button' className='inline-block border border-orange-500 bg-transparent text-orange-500 hover:bg-orange-500 hover:text-white transition duration-300 py-2 px-4 rounded-2xl w-64'>
+        <Link href={'/Karriere/Bewerbung'} className='inline-block border border-orange-500 bg-transparent text-orange-500 hover:bg-orange-500 hover:text-white transition duration-300 py-2 px-4 rounded-2xl w-64'>
           Jetzt Initiativbewerbung senden
-        </button>
+        </Link>
       </section>
     </div>
   );

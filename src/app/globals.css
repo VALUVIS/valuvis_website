@@ -80,3 +80,25 @@ body {
 #richtTextBlogPage h6, #richTextJobPage h6 {
   font-size: 1em; /* 16px */
 }
+
+@media (max-width: 768px) {
+  #richtTextBlogPage h2, #richTextJobPage h2 {
+    font-size: 1.5em; /* 24px */
+  }
+
+  #richtTextBlogPage h3, #richTextJobPage h3 {
+    font-size: 1.25em; /* 20px */
+  }
+
+  #richtTextBlogPage h4, #richTextJobPage h4 {
+    font-size: 1em; /* 16px */
+  }
+
+  #richtTextBlogPage h5, #richTextJobPage h5 {
+    font-size: 0.875em; /* 14px */
+  }
+
+  #richtTextBlogPage h6, #richTextJobPage h6 {
+    font-size: 0.75em; /* 12px */
+  }
+}
