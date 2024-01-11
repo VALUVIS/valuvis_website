@@ -1,6 +1,6 @@
 'use client';
 import React, {useState} from 'react';
-import { apiCall } from '../../utils/api';
+import { apiCall } from '../../../lib/utils/api';
 
 const NewsletterForm: React.FC = () => {
   const [modalContent, setModalContent] = useState<string | null>(null);

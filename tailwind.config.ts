@@ -23,6 +23,11 @@ const config: Config = {
       },
     },
   },
+  variants: {
+    extend: {
+      textColor: ['hover'],
+    },
+  },
   plugins: [],
 }
 export default config

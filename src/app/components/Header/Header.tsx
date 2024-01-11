@@ -57,7 +57,7 @@ const Header: React.FC = () => {
 
   return (
     <>
-      <header className={`flex items-center justify-between lg:justify-start gap-8 md:gap-14 lg:gap-20 p-4 shadow-md ${isHomePage ? 'bg-blue-900 text-white' : 'bg-neutral-50 text-gray-600'} text-sm md:text-base lg:text-base`}>
+      <header className={`w-full flex items-center justify-between lg:justify-start gap-8 md:gap-14 lg:gap-20 p-4 shadow-md ${isHomePage ? 'bg-blue-900 text-white' : 'bg-neutral-50 text-gray-600'} text-sm md:text-base lg:text-base`}>
         <div className="logo flex flex-shrink-0 items-center">
           <Image
               src="/logos/VA-Logo.png" 
