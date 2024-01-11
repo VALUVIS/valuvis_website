@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { getEntryBySlug, getEntriesByContentType } from '../../lib/contentful/client';
+import { getEntriesByContentType } from '../../lib/contentful/client';
 import BlogCard from '../components/Blog/BlogCard';
 import { Entry } from 'contentful';
 
@@ -13,7 +13,6 @@ type Post = {
 type Field = {
   title: string;
   subtitle: string;
-  content: string;
   publishDate: string;
   readingTime: string;
   cover: Cover;
@@ -42,7 +41,6 @@ export default function Ratgeber() {
   useEffect(() => {
     const fetchData = async () => {
       const result = await getEntriesByContentType('blogPost');
-      console.log(getEntryBySlug('blogPost', 'kauf-von-eigentumswohnungen-in-frankfurt-am-main'));
       
       const posts: Post[] = result.items.map((item: Entry<any>) => {
         return {

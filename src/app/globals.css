@@ -57,6 +57,26 @@ body {
   animation: blink 1s infinite;
 }
 
-#richtTextBlogPage {
+#richtTextBlogPage, #richTextJobPage {
   font-weight: 300;
+}
+
+#richtTextBlogPage h2, #richTextJobPage h2 {
+  font-size: 2em; /* 32px */
+}
+
+#richtTextBlogPage h3, #richTextJobPage h3 {
+  font-size: 1.75em; /* 28px */
+}
+
+#richtTextBlogPage h4, #richTextJobPage h4 {
+  font-size: 1.5em; /* 24px */
+}
+
+#richtTextBlogPage h5, #richTextJobPage h5 {
+  font-size: 1.25em; /* 20px */
+}
+
+#richtTextBlogPage h6, #richTextJobPage h6 {
+  font-size: 1em; /* 16px */
 }
