@@ -8,7 +8,7 @@ import ColumnFieldSection from './ColumnFieldSection';
 import SliderSection from './SliderSection';
 import InputSection from './InputSection';
 import ContactSection from './ContactSection';
-import { apiCall } from '@/app/utils/api';
+import { apiCall } from '@/lib/utils/api';
 
 const HouseForm = () => {
     const [currentStep, setCurrentStep] = useState(1);

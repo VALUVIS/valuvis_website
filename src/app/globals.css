@@ -56,3 +56,7 @@ body {
 .blinking-cursor {
   animation: blink 1s infinite;
 }
+
+#richtTextBlogPage {
+  font-weight: 300;
+}

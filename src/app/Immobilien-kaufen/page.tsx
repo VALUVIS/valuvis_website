@@ -1,7 +1,7 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { apiCall } from '../utils/api';
+import { apiCall } from '../../lib/utils/api';
 import Image from 'next/image';
 
 type ImageType = {

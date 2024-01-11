@@ -1,7 +1,7 @@
 'use client';
 import { usePathname } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
-import { apiCall } from '../../utils/api';
+import { apiCall } from '../../../lib/utils/api';
 import Image from 'next/image';
 import ImageGalleryModal from '@/app/components/Immobilien-Kaufen/ImageGalleryModal';
 
