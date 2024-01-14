@@ -96,12 +96,17 @@ const Header: React.FC = () => {
           <ul className="hidden lg:flex items-center gap-4 md:gap-6 lg:gap-2 xl:gap-4 h-auto">
             {navigationLinks.map((link) => (
               <li key={link.title} className='peer py-4'
-                  onMouseEnter={() => handleMouseEnter(link.title)}
-                  onMouseLeave={() => setHoveredLink('')}>
-                <Link id={link.id} href={link.path} className="hover:text-gray-900 transition-colors lg:px-2 xl:px-3"
-                  >
-                  {link.title}
-                </Link>
+                onMouseEnter={() => handleMouseEnter(link.title)}
+                onMouseLeave={() => setHoveredLink('')}>
+                {link.title === 'Mehr' ? (
+                  <span id={link.id} className="lg:px-2 xl:px-3">
+                    {link.title}
+                  </span>
+                ) : (
+                  <Link id={link.id} href={link.path} className="hover:text-gray-900 transition-colors lg:px-2 xl:px-3">
+                    {link.title}
+                  </Link>
+                )}
               </li>
             ))}
           </ul>

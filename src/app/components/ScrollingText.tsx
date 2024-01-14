@@ -71,6 +71,7 @@ export default function ScrollingText() {
         >
             <span>Wir sind</span>
             <span className='mt-2 h-5 sm:h-8 md:h-10 lg:h-20'>
+                {!isFadingOut && <span className='opacity-0'>|</span>}
                 {currentText.slice(0, currentLetterIndex)}
                 <span className="blinking-cursor">|</span>
             </span>
