@@ -3,10 +3,10 @@ import ScrollingText from './components/ScrollingText';
 
 export default function Home() {
   return (
-    <main className="home flex flex-col gap-16 mb-20">
-      <section className='w-screen h-[120vh] relative'>
+    <main className="home flex flex-col gap-16">
+      <section className='w-full h-[120vh] relative'>
         <div 
-          className='w-screen h-full absolute'
+          className='w-full h-full absolute'
         >
           <Image
             src="/images/Frankfurt.webp" 

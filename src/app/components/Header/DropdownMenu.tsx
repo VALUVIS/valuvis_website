@@ -4,35 +4,34 @@ import React from 'react';
 type NavLink = {
   title: string;
   path: string;
+  id?: string;
 };
 
 type DropdownMenuProps = {
-  title: string;
-  path: string;
-  links: NavLink[];
-  isHomePage: boolean;
+  divRef: React.RefObject<HTMLDivElement>;
+  dropdownContent: string;
+  kaufLinks: NavLink[];
+  verkaufLinks: NavLink[];
+  moreLinks: NavLink[];
 };
 
-const DropdownMenu: React.FC<DropdownMenuProps> = ({ title, links, path, isHomePage }) => (
-  <li className="relative flex flex-col items-center justify-center h-full">
-    {title === "Mehr" ? (
-      <div className='peer hover:text-gray-900 transition-colors h-full'>
-        {title}
-      </div>
-    ) : (
-      <Link href={path} className='peer hover:text-gray-900 transition-colors h-full'>
-        {title}
-      </Link>
-    )}
-    <ul className={`hidden z-50 peer-hover:flex hover:flex
-      flex-col ${isHomePage ? 'bg-blue-900' : 'bg-neutral-50'} absolute top-[100%] shadow-md`}>
-      {links.map((link) => (
-        <Link key={link.title} href={link.path} className={`px-5 py-3 ${isHomePage ? 'hover:bg-blue-700' : 'hover:bg-gray-200'}`}>
-          {link.title}
-        </Link>
+const DropdownMenu: React.FC<DropdownMenuProps> = ({ dropdownContent, kaufLinks, verkaufLinks, moreLinks, divRef }) => {
+  return (
+    <div 
+      ref={divRef}
+      className={`hidden peer-hover:flex hover:flex absolute flex flex-col backdrop-filter backdrop-blur-lg bg-opacity-30 bg-white transition-height shadow-md`}
+    >
+      {dropdownContent === 'Immobilien kaufen' && kaufLinks.map((link) => (
+        <Link key={link.id} href={link.path} className='px-5 py-3 bg-opacity-30 hover:bg-opacity-60 hover:bg-orange-500'>{link.title}</Link>
       ))}
-    </ul>
-  </li>
-);
+      {dropdownContent === 'Immobilien verkaufen' && verkaufLinks.map((link) => (
+        <Link key={link.id} href={link.path} className='px-5 py-3 bg-opacity-30 hover:bg-opacity-60 hover:bg-orange-500'>{link.title}</Link>
+      ))}
+      {dropdownContent === 'Mehr' && moreLinks.map((link) => (
+        <Link key={link.id} href={link.path} className='px-5 py-3 bg-opacity-30 hover:bg-opacity-60 hover:bg-orange-500'>{link.title}</Link>
+      ))}
+    </div>
+  );
+};
 
 export default DropdownMenu;

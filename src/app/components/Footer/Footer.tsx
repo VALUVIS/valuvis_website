@@ -67,7 +67,7 @@ const Footer: React.FC = () => {
             <NewsletterForm />
         </div>
         <div className="text-xs md:text-sm text-start mt-10 text-neutral-600">
-            © 2023 Valuvis Immobilien e.K.
+            © 2024 Valuvis Immobilien e.K.
         </div>
     </footer>
   );
