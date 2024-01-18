@@ -20,7 +20,7 @@ export async function apiCall(url: string, method: 'GET' | 'POST' | 'PUT' | 'DEL
     const response = await fetch(url, options);
 
     if (!response.ok) {
-        throw new Error('Es gab einen Fehler bei der Anfrage.');
+        throw new Error(`Es gab einen Fehler bei der Anfrage. Status: ${response.status} ${response.statusText}`);
     }
 
     return response.json();

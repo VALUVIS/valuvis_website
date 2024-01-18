@@ -12,7 +12,7 @@ const FAQItem: React.FC<FAQItemProps> = ({ question, answer }: FAQItemProps) => 
   return (
     <div className="faq-item flex flex-col gap-4 border-b border-gray-200 pb-6">
       <div className="question flex gap-4" onClick={() => setIsOpen(!isOpen)}>
-        <h3 className='text-lg md:text-xl lg:text-2xl font-medium tracking-widest'>{question}</h3>
+        <h3 className='text-base md:text-lg lg:text-xl font-medium tracking-widest'>{question}</h3>
         <span className="inline ml-2 cursor-pointer">{isOpen ? '▲' : '▼'}</span>
       </div>
       {isOpen && <p className="answer text-lg md:text-xl lg:text-2xl tracking-wider">{answer}</p>}

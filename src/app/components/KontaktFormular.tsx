@@ -82,7 +82,7 @@ const KontaktFormular: React.FC = () => {
         <Modal content={modalContent} onClose={() => setModalContent(null)} />
 
         <form onSubmit={handleSubmit} className='flex flex-col items-center gap-4 md:gap-6 lg:gap-8 text-sm md:text-xl lg:text-2xl'>
-          <div className='flex justify-center gap-2 md:gap-3 lg:gap-4 w-full'>
+          <div className='flex flex-col md:flex-row justify-center gap-4 md:gap-3 lg:gap-4 w-full'>
               <div className="border-b border-gray-400 w-full flex-1">
                   <input
                       type="text"
@@ -109,7 +109,7 @@ const KontaktFormular: React.FC = () => {
               
           </div>
 
-          <div className='flex justify-center gap-2 md:gap-3 lg:gap-4 w-full'>
+          <div className='flex flex-col md:flex-row justify-center gap-4 md:gap-3 lg:gap-4 w-full'>
               <div className="border-b border-gray-400 w-full flex-1">
                   <input
                       type="email"

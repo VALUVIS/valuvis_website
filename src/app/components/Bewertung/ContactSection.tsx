@@ -1,5 +1,19 @@
 import React, { useState } from 'react';
 import { apiCall } from '../../../lib/utils/api';
+import Modal from '../Modal';
+
+type ContactSectionProps = {
+    object: string;
+    streetAndNumber: string;
+    postCode: string;
+    useSize?: string;
+    landSize?: string;
+    houseAge?: string;
+    houseType?: string;
+    livingSpace?: string;
+    useType?: string;
+    industryType?: string;
+};
 
 type ContactFormularDaten = {
     vorname: string;
@@ -9,7 +23,9 @@ type ContactFormularDaten = {
     agreedToPrivacy: boolean;
 };
 
-const ContactSection: React.FC = () => {
+const ContactSection: React.FC<ContactSectionProps> = (props) => {
+    const [modalContent, setModalContent] = useState<string | null>(null);
+
     const [formData, setFormData] = useState<ContactFormularDaten>({
         vorname: '',
         nachname: '',
@@ -17,6 +33,11 @@ const ContactSection: React.FC = () => {
         telefon: '',
         agreedToPrivacy: false
     });
+
+    const messageBody = Object.entries({ ...props, ...formData })
+        .filter(([key, value]) => key !== 'agreedToPrivacy' && value !== undefined)
+        .map(([key, value]) => `${key}: ${value}`)
+        .join(', ');
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -28,7 +49,6 @@ const ContactSection: React.FC = () => {
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        
 
         const form = event.currentTarget;
         const email = (form.elements.namedItem('email') as HTMLInputElement)?.value;
@@ -44,7 +64,7 @@ const ContactSection: React.FC = () => {
 
         // Senden der Anfrage an Propstack
         try {
-            const responseData = await apiCall('https://api.propstack.de/v1/contacts', 'POST', {
+            await apiCall('https://api.propstack.de/v1/contacts', 'POST', {
                 client: {
                     email: email,
                     first_name: firstName,
@@ -54,33 +74,32 @@ const ContactSection: React.FC = () => {
                     home_cell: telefon
                 }
             });
-            console.log('Response:', responseData);
-            const clientId = responseData.id;
-            console.log('Client ID:', clientId);
 
             try {
-                console.log('About to make second API call');
-                const responseDataObject = await apiCall('https://api.propstack.de/v1/units', 'POST', {
-                    property: {
-                        title: 'Nice apartment',
-                        description_note: 'Schöne Wohnung',
-                        location_note: 'Frankfurt',
-                        furnishing_note: 'Möbliert',
-                        other_note: 'Schöne Aussicht',
-                        long_description_note: 'Schöne Wohnung in Frankfurt mit schöner Aussicht.',
-                        long_location_note: 'Frankfurt am Main Stadtmitte',
-                        long_furnishing_note: 'Möbliert mit Küche',
-                        long_other_note: 'Schöne Aussicht auf den Main.',
-                        relationships_attributes: [{
-                            internal_name: 'owner',
-                            related_client_id: clientId
-                        }]
+                const response = await apiCall('https://api.propstack.de/v1/messages', 'POST', {
+                    
+                    message : {
+                        broker_id: 125134,
+                        to: ["m.ruecker@valuvis.de"],
+                        subject: `Bewertungsanfrage für ${props.object}`,
+                        body: messageBody,
                     }
                 });
 
-                console.log('Response:', responseDataObject);
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    console.error('Error data:', errorData);
+                    throw new Error(`API request failed with status ${response.status}`);
+                }
+
             } catch (error) {
-                console.error('Error with second API call:', error);
+                if (error instanceof Error) {
+                    console.error('Error with second API call:', error);
+                    console.error('Error message:', error.message);
+                    console.error('Error stack:', error.stack);
+                } else {
+                    console.error('Caught an unknown error:', error);
+                }
             }
 
             setFormData({
@@ -91,65 +110,79 @@ const ContactSection: React.FC = () => {
                 agreedToPrivacy: false
             });
 
-            alert('Vielen Dank für Ihre Nachricht! Wir werden uns in Kürze bei Ihnen über E-Mail melden.');
+            setModalContent('Vielen Dank für Ihre Nachricht! Wir werden uns in Kürze bei Ihnen über E-Mail melden.');
         } catch (error) {
-            alert('Ein Fehler ist aufgetreten. Bitte überprüfen Sie Ihre Netzwerkverbindung.');
+            setModalContent('Ein Fehler ist aufgetreten. Bitte überprüfen Sie Ihre Netzwerkverbindung.');
         }
     };
 
     return (
-        <form onSubmit={handleSubmit} className='flex flex-col gap-8'>
-            <div className='flex flex-col gap-6'>
-                <div className='flex gap-2'>
+        <div className="mt-0">
+            <Modal content={modalContent} onClose={() => setModalContent(null)} />
+            <form onSubmit={handleSubmit} className='flex flex-col gap-8'>
+                <div className='flex flex-col gap-6'>
+                    <div className='flex flex-col gap-6 md:flex-row md:gap-2'>
+                        <input
+                            type="text"
+                            name="vorname"
+                            value={formData.vorname}
+                            placeholder='Vorname'
+                            required
+                            onChange={handleChange}
+                            className='rounded border p-2'
+                        />
+                        <input
+                            type="text"
+                            name="nachname"
+                            value={formData.nachname}
+                            placeholder='Nachname'
+                            required
+                            onChange={handleChange}
+                            className='rounded border p-2'
+                        />
+                    </div>
+
                     <input
-                        type="text"
-                        name="vorname"
-                        value={formData.vorname}
-                        placeholder='Vorname'
+                        type="email"
+                        name="email"
+                        value={formData.email}
+                        placeholder='Email'
+                        required
                         onChange={handleChange}
                         className='rounded border p-2'
                     />
+
                     <input
-                        type="text"
-                        name="nachname"
-                        value={formData.nachname}
-                        placeholder='Nachname'
+                        type="tel"
+                        name="telefon"
+                        value={formData.telefon}
+                        placeholder='Telefonnummer'
+                        required
                         onChange={handleChange}
                         className='rounded border p-2'
                     />
+
                 </div>
 
-                <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    placeholder='Email'
-                    onChange={handleChange}
-                    className='rounded border p-2'
-                />
-
-                <input
-                    type="tel"
-                    name="telefon"
-                    value={formData.telefon}
-                    placeholder='Telefonnummer'
-                    onChange={handleChange}
-                    className='rounded border p-2'
-                />
-
-            </div>
-
-            <label className='flex gap-2'>
-                <input
-                    type="checkbox"
-                    checked={formData.agreedToPrivacy}
-                    onChange={(e) => setFormData({ ...formData, agreedToPrivacy: e.target.checked })}
-                />
-                Ich bin mit den Datenschutzbestimmungen einverstanden.
-            </label>
-            <br />
-            <button type="submit">Submit</button>
-        </form>
+                <label className='flex gap-2'>
+                    <input
+                        type="checkbox"
+                        checked={formData.agreedToPrivacy}
+                        onChange={(e) => setFormData({ ...formData, agreedToPrivacy: e.target.checked })}
+                    />
+                    Ich bin mit den Datenschutzbestimmungen einverstanden.
+                </label>
+                <br />
+                <button 
+                    type="submit" 
+                    className='inline-block border border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white transition duration-300 text-center py-2 px-4 rounded-2xl'
+                    disabled={!formData.agreedToPrivacy}
+                >
+                    Submit
+                </button>
+            </form>
+        </div>
+        
     );
 };
 

@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 
-interface SliderSectionProps {
+type SliderSectionProps = {
     title: string;
     min: number;
     max: number;
     unit: string;
     initialValue: number; 
-    onNext: () => void;
-    onSkip: () => void; 
+    onNext: (value: string) => void;
+    onSkip: (message: string) => void;
 }
 
 const SliderSection: React.FC<SliderSectionProps> = ({ title, min, max, unit, initialValue, onNext, onSkip }) => {
@@ -18,7 +18,7 @@ const SliderSection: React.FC<SliderSectionProps> = ({ title, min, max, unit, in
     };
 
     return (
-        <div className="w-full grid place-items-center gap-10">
+        <div className="w-full grid place-items-center gap-12">
             <label htmlFor="slider" className='tracking-widest font-medium text-lg md:text-xl lg:text-2xl'>{title}</label>
 
             <div className="flex flex-col justify-center w-full gap-4">
@@ -30,9 +30,11 @@ const SliderSection: React.FC<SliderSectionProps> = ({ title, min, max, unit, in
                     <p className="flex-shrink-0">{max} {unit}</p>
                 </div>   
             </div>
-            
-            <button type='submit' onClick={onNext}>Weiter</button>
-            <button type='submit' onClick={onSkip}>Ich weiß es nicht</button>
+
+            <div className='flex flex-col gap-2'>
+                <button type='submit' onClick={() => onNext(`${value} ${unit}`)}  className='inline-block border border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white transition duration-300 text-center py-2 px-4 rounded-2xl'>Weiter</button>
+                <button type='submit' onClick={() => onSkip("Ich weiß es nicht")}  className='inline-block border border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white transition duration-300 text-center py-2 px-4 rounded-2xl'>Ich weiß es nicht</button>
+            </div>
         </div>
     );
 };

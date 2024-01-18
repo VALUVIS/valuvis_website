@@ -57,9 +57,9 @@ export default function Karriere() {
 
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 lg:gap-12'>
           {data?.items.map((job: Job) => (
-            <Link href={`/karriere/${job.fields.slug}`}>
+            <div key={job.fields.slug}>
               <JobCard title={job.fields.title} subtitle={job.fields.subtitle} slug={job.fields.slug} />
-            </Link>
+            </div>
           ))}
         </div>
       </section>

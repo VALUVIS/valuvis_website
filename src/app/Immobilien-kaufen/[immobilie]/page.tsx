@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { apiCall } from '../../../lib/utils/api';
 import Image from 'next/image';
 import ImageGalleryModal from '@/app/components/Immobilien-Kaufen/ImageGalleryModal';
+import { motion } from 'framer-motion';
 
 type ImageType = {
     url: string;
@@ -79,9 +80,6 @@ const PropertyPage = () => {
                     <div className='w-full h-20 bg-gray-200 animate-pulse'></div>
 
                     <div className='h-6 w-full bg-gray-200 animate-pulse'></div>
-                    <div className="grid grid-flow-col auto-cols-auto gap-6 text-base md:text-lg lg:text-xl tracking-widest leading-normal">
-                        <div className='h-6 w-full bg-gray-200 animate-pulse'></div>
-                    </div>
                     
                 </div>
             </div>
@@ -108,7 +106,7 @@ const PropertyPage = () => {
 
     const propertyCrutialDetails = [
         { label: 'Kaltmiete', value: property.base_rent, unit: '€' },
-        { label: 'Preis', value: property.price, unit: '€' },
+        { label: 'Preis', value: property.price ? property.price.toLocaleString('de-DE') : null, unit: '€' },
         { label: 'Zimmer', value: property.number_of_rooms },
         { label: 'Wohnfläche', value: property.living_space, unit: 'm²' },
       ];
@@ -121,7 +119,9 @@ const PropertyPage = () => {
                 
                 <div className="flex flex-col sm:flex-row gap-12 max-w-full">
                     {property.images && property.images.slice(0, 1).map((image, index) => 
-                        <div className="flex-1 max-w-full">
+                        <motion.div className="flex-1 max-w-full"
+                                    whileHover={{ scale: 1.03 }}
+                        >
                             <Image
                                 key={index}
                                 src={image.url}
@@ -129,10 +129,10 @@ const PropertyPage = () => {
                                 width={500}
                                 height={500} 
                                 layout='responsive'
-                                className='cursor-pointer'
+                                className='cursor-pointer rounded-xl'
                                 onClick={handleOpenModal}
                             />
-                        </div>
+                        </motion.div>
                     )}
                     
                     {property.description_note &&

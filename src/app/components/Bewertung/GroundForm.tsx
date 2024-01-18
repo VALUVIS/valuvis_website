@@ -1,11 +1,5 @@
 import React, { useState } from 'react';
-import { FourFieldSection } from './FourFieldSection';
-import HouseIcon from '../Icons/HouseIcon';
-import ApartmentIcon from '../Icons/ApartmentIcon';
-import GroundIcon from '../Icons/GroundIcon';
-import FactoryIcon from '../Icons/FactoryIcon';
 import ColumnFieldSection from './ColumnFieldSection';
-import SliderSection from './SliderSection';
 import InputSection from './InputSection';
 import ContactSection from './ContactSection';
 
@@ -33,34 +27,26 @@ const GroundForm = () => {
         }
     };
 
-    // Event-Handler
-    const handleLandSizeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setLandSize(event.target.value);
+    const handleSelectLandSize = (field: string) => {
+        setLandSize(field);
+        goToNextStep(); 
     };
 
-    const handleUseTypeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setUseType(event.target.value);
-    };
-
-    const handleStreetAndNumberChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setStreetAndNumber(event.target.value);
-    };
-
-    const handlePostCodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setPostCode(event.target.value);
-    }
-
-    // Formular absenden
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        // Verarbeiten der Daten
+    const handleSelectUseType = (field: string) => {
+        setUseType(field);
+        goToNextStep(); 
     };
 
     return (
-        <form onSubmit={handleSubmit} className='flex'>
+        <div className='flex flex-col-reverse md:flex-row gap-4 md:gap-0 items-center'>
             
-            <button type='button' onClick={goToPreviousStep} className='flex flex-col items-center justify-center'>
-                <svg height="30" viewBox="0 -960 960 960" width="30">
+            <button 
+                type='button' 
+                onClick={goToPreviousStep} 
+                className='h-20 w-20 flex flex-col items-center justify-center border-2 border-orange-500 rounded-full text-orange-500 hover:bg-orange-500 hover:text-white transition-colors duration-200' 
+                aria-label='Zurück'
+            >
+                <svg height="30" viewBox="0 -960 960 960" width="30" className="fill-current">
                     <path d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z"/>
                 </svg>
                 Zurück
@@ -72,16 +58,16 @@ const GroundForm = () => {
                         title="Erzählen Sie uns ein wenig mehr Ihr Grundstück" 
                         subtitle="Wie groß ist die Grundstücksfläche?" 
                         fields={landSizes}
-                        onSelect={goToNextStep} 
+                        onSelect={handleSelectLandSize} 
                     />
                 )}
 
                 {currentStep === 2 && (
                     <ColumnFieldSection
-                    title="Welche Nutzung ist für das Grundstück vorgesehen?" 
-                    subtitle="Mehrfachauswhal möglich"
-                    fields={useTypes}
-                    onSelect={goToNextStep}
+                        title="Erzählen Sie uns ein wenig mehr Ihr Grundstück" 
+                        subtitle="Welche Nutzung ist für das Grundstück vorgesehen?"
+                        fields={useTypes}
+                        onSelect={handleSelectUseType}
                     />
                 )}
 
@@ -90,17 +76,27 @@ const GroundForm = () => {
                     <InputSection
                         title="Wo befindet sich Ihr Grundstück?"
                         values={['Straße und Hausnummer', 'PLZ']}
+                        onSubmit={(data) => {
+                            setStreetAndNumber(data["Straße und Hausnummer"]);
+                            setPostCode(data["PLZ"]);
+                            goToNextStep();
+                        }}
                     />
-                    <button type="button" onClick={goToNextStep}>Bewertung anfordern</button>
                 </div>
                 )}   
 
                 {currentStep === 4 && (
-                    <ContactSection />
+                    <ContactSection
+                        object='Grundstück'
+                        landSize={landSize}
+                        useType={useType}
+                        streetAndNumber={streetAndNumber}
+                        postCode={postCode}
+                    />
                 )}
             </div>
              
-        </form>
+        </div>
     );
 };
 

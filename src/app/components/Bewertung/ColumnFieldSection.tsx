@@ -2,7 +2,7 @@ type ColumnFieldSectionProps = {
     title: string;
     subtitle: string;
     fields: string [];
-    onSelect?: (field: string) => void;
+    onSelect: (field: string) => void;
 };
 
 const ColumnFieldSection: React.FC<ColumnFieldSectionProps> = ({ title, subtitle, fields, onSelect }) => {
@@ -19,6 +19,7 @@ const ColumnFieldSection: React.FC<ColumnFieldSectionProps> = ({ title, subtitle
             <div className="grid grid-cols-1">
                 {fields.map((field) => (
                     <div 
+                        key={field}
                         className="cursor-pointer grid place-items-center border pl-4 pr-4 pb-2 pt-2 md:pl-8 md:pr-8 md:pb-4 md:pt-4 lg:pl-10 lg:pr-10 lg:pb-6 lg:pt-6 shadow transform transition duration-500 ease-in-out hover:scale-105 hover:shadow-lg"
                         onClick={() => handleClick(field)}
                     >

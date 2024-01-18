@@ -1,11 +1,6 @@
 import React, { useState } from 'react';
 import { FourFieldSection } from './FourFieldSection';
-import HouseIcon from '../Icons/HouseIcon';
-import ApartmentIcon from '../Icons/ApartmentIcon';
-import GroundIcon from '../Icons/GroundIcon';
-import FactoryIcon from '../Icons/FactoryIcon';
 import ColumnFieldSection from './ColumnFieldSection';
-import SliderSection from './SliderSection';
 import InputSection from './InputSection';
 import ContactSection from './ContactSection';
 
@@ -20,10 +15,10 @@ const IndustryForm = () => {
 
     // Vordefinierte Auswahlmöglichkeiten
     const industryTypes = {
-        'Büro': HouseIcon,
-        'Einzelhandel': ApartmentIcon,
-        'Logistik': HouseIcon,
-        'Mischnutzung': HouseIcon
+        'Büro': '/gifs/offices.gif',
+        'Einzelhandel': '/gifs/shop.gif',
+        'Logistik': '/gifs/warehouse.gif',
+        'Mischnutzung': '/gifs/doublehouse.gif',
     };
     const houseAges = ['vor 1940', 'vor 1980', 'vor 2010', 'nach 2010', 'Ich weiß es nicht'];
     const useSizes = ['bis 500 m²', 'bis 1000 m²', 'bis 2000 m²', 'über 2000 m²', 'Ich weiß es nicht'];
@@ -42,42 +37,36 @@ const IndustryForm = () => {
         }
     };
 
-    // Event-Handler
-    const handleIndustryTypeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setIndustryType(event.target.value);
+    const handleSelectIndustryType = (field: string) => {
+        setIndustryType(field);
+        goToNextStep(); 
     };
 
-    const handleUseSizeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setUseSize(event.target.value);
-    }
-
-    const handleLandSizeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setLandSize(event.target.value);
-    };
-    
-    const handleHouseAgeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setHouseAge(event.target.value);
+    const handleSelectUseSize = (field: string) => {
+        setUseSize(field);
+        goToNextStep(); 
     };
 
-    const handleStreetAndNumberChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setStreetAndNumber(event.target.value);
+    const handleSelectLandSize = (field: string) => {
+        setLandSize(field);
+        goToNextStep(); 
     };
 
-    const handlePostCodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setPostCode(event.target.value);
-    }
-
-    // Formular absenden
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        // Verarbeiten der Daten
+    const handleSelectHouseAge = (field: string) => {
+        setHouseAge(field);
+        goToNextStep(); 
     };
 
     return (
-        <form onSubmit={handleSubmit} className='flex'>
+        <div className='flex flex-col-reverse md:flex-row gap-4 md:gap-0 items-center'>
             
-            <button type='button' onClick={goToPreviousStep} className='flex flex-col items-center justify-center'>
-                <svg height="30" viewBox="0 -960 960 960" width="30">
+            <button 
+                type='button' 
+                onClick={goToPreviousStep} 
+                className='h-20 w-20 flex flex-col items-center justify-center border-2 border-orange-500 rounded-full text-orange-500 hover:bg-orange-500 hover:text-white transition-colors duration-200' 
+                aria-label='Zurück'
+            >
+                <svg height="30" viewBox="0 -960 960 960" width="30" className="fill-current">
                     <path d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z"/>
                 </svg>
                 Zurück
@@ -87,9 +76,9 @@ const IndustryForm = () => {
                 {currentStep === 1 && (
                     <FourFieldSection 
                         title="Erzählen Sie uns ein wenig mehr Ihre Wohnung" 
-                        subtitle="Wann wurde die Immobilie gebaut?" 
-                        fieldIconPairs={Object.entries(industryTypes).map(([field, icon]) => ({ field, icon }))}
-                        onSelect={goToNextStep} 
+                        subtitle="Um welche Art von Gewerbe handelt es sich bei Ihrer Immobilie?" 
+                        fieldImagePairs={Object.entries(industryTypes).map(([field, image]) => ({ field, image }))}
+                        onSelect={handleSelectIndustryType} 
                     />
                 )}
 
@@ -98,7 +87,7 @@ const IndustryForm = () => {
                         title="Erzählen Sie uns ein wenig mehr Ihre Immobilie"
                         subtitle="Wie groß ist die Nutzfläche?"
                         fields={useSizes}
-                        onSelect={goToNextStep}
+                        onSelect={handleSelectUseSize}
                     />
                 )}
 
@@ -107,7 +96,7 @@ const IndustryForm = () => {
                         title="Erzählen Sie uns ein wenig mehr Ihre Immobilie"
                         subtitle="Wie groß ist die Grundstücksfläche?"
                         fields={landSizes}
-                        onSelect={goToNextStep}
+                        onSelect={handleSelectLandSize}
                     />
                 )}
 
@@ -116,7 +105,7 @@ const IndustryForm = () => {
                         title="Erzählen Sie uns ein wenig mehr Ihre Immobilie"
                         subtitle="Wann wurde die Immobilie gebaut?"
                         fields={houseAges}
-                        onSelect={goToNextStep}
+                        onSelect={handleSelectHouseAge}
                     />
                 )}
 
@@ -125,17 +114,29 @@ const IndustryForm = () => {
                     <InputSection
                         title="Wo befindet sich Ihre Immobilie?"
                         values={['Straße und Hausnummer', 'PLZ']}
+                        onSubmit={(data) => {
+                            setStreetAndNumber(data["Straße und Hausnummer"]);
+                            setPostCode(data["PLZ"]);
+                            goToNextStep();
+                        }}
                     />
-                    <button type="button" onClick={goToNextStep}>Bewertung anfordern</button>
                 </div>
                 )}   
 
                 {currentStep === 6 && (
-                    <ContactSection />
+                    <ContactSection 
+                        object='Gewerbeimmobilie'
+                        industryType={industryType}
+                        useSize={useSize}
+                        landSize={landSize}
+                        houseAge={houseAge}
+                        streetAndNumber={streetAndNumber}
+                        postCode={postCode}
+                    />
                 )}
             </div>
              
-        </form>
+        </div>
     );
 };
 

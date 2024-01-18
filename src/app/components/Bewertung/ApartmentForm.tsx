@@ -1,9 +1,5 @@
 import React, { useState } from 'react';
 import { FourFieldSection } from './FourFieldSection';
-import HouseIcon from '../Icons/HouseIcon';
-import ApartmentIcon from '../Icons/ApartmentIcon';
-import GroundIcon from '../Icons/GroundIcon';
-import FactoryIcon from '../Icons/FactoryIcon';
 import ColumnFieldSection from './ColumnFieldSection';
 import SliderSection from './SliderSection';
 import InputSection from './InputSection';
@@ -26,6 +22,7 @@ const ApartmentForm = () => {
     // Schritt-Wechsel-Funktionen
     const goToNextStep = () => {
         setCurrentStep(currentStep + 1);
+        console.log(streetAndNumber, postCode);
     };
 
     const goToPreviousStep = () => {
@@ -36,58 +33,50 @@ const ApartmentForm = () => {
         }
     };
 
-    // Event-Handler
-    const handleHouseAgeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setHouseAge(event.target.value);
+    const handleSelectHouseAge = (field: string) => {
+        setHouseAge(field);
+        goToNextStep(); 
     };
 
-    const handleLivingSpaceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setLivingSpace(event.target.value);
-    };
-
-    const handleStreetAndNumberChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setStreetAndNumber(event.target.value);
-    };
-
-    const handlePostCodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setPostCode(event.target.value);
-    }
-
-    // Formular absenden
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        // Verarbeiten der Daten
+    const handleSelectLivingSpace = (value: string) => {
+        setLivingSpace(value);
+        goToNextStep(); 
     };
 
     return (
-        <form onSubmit={handleSubmit} className='flex'>
-            
-            <button type='button' onClick={goToPreviousStep} className='flex flex-col items-center justify-center'>
-                <svg height="30" viewBox="0 -960 960 960" width="30">
+        <div className='flex flex-col-reverse md:flex-row gap-4 md:gap-0 justify-center items-center w-full'>
+                    
+            <button 
+                type='button' 
+                onClick={goToPreviousStep} 
+                className='h-20 w-20 flex flex-col items-center justify-center border-2 border-orange-500 rounded-full text-orange-500 hover:bg-orange-500 hover:text-white transition-colors duration-200' 
+                aria-label='Zurück'
+            >
+                <svg height="30" viewBox="0 -960 960 960" width="30" className="fill-current">
                     <path d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z"/>
                 </svg>
                 Zurück
             </button>
-            
-            <div className='flex-grow'>
+                    
+            <div>
                 {currentStep === 1 && (
                     <ColumnFieldSection 
                         title="Erzählen Sie uns ein wenig mehr Ihre Wohnung" 
                         subtitle="Wann wurde die Immobilie gebaut?" 
                         fields={houseAges}
-                        onSelect={goToNextStep} 
+                        onSelect={handleSelectHouseAge} 
                     />
                 )}
 
                 {currentStep === 2 && (
                     <SliderSection
-                    title="Und wie groß ist die Wohnfläche?" 
-                    min={livingSpacesMin}
-                    max={livingSpacesMax}
-                    unit={livingSpacesUnit}
-                    initialValue={livingSpacesInitialValue}
-                    onNext={goToNextStep} 
-                    onSkip={goToNextStep}
+                        title="Und wie groß ist die Wohnfläche?" 
+                        min={livingSpacesMin}
+                        max={livingSpacesMax}
+                        unit={livingSpacesUnit}
+                        initialValue={livingSpacesInitialValue}
+                        onNext={handleSelectLivingSpace} 
+                        onSkip={handleSelectLivingSpace}
                     />
                 )}
 
@@ -96,17 +85,27 @@ const ApartmentForm = () => {
                     <InputSection
                         title="Wo befindet sich Ihre Immobilie?"
                         values={['Straße und Hausnummer', 'PLZ']}
+                        onSubmit={(data) => {
+                            setStreetAndNumber(data["Straße und Hausnummer"]);
+                            setPostCode(data["PLZ"]);
+                            goToNextStep();
+                        }}
                     />
-                    <button type="button" onClick={goToNextStep}>Bewertung anfordern</button>
                 </div>
                 )}   
 
                 {currentStep === 4 && (
-                    <ContactSection />
+                    <ContactSection
+                        object='Wohnung'
+                        houseAge={houseAge}
+                        livingSpace={livingSpace}
+                        streetAndNumber={streetAndNumber}
+                        postCode={postCode}
+                    />
                 )}
             </div>
-             
-        </form>
+                     
+        </div>
     );
 };
 
