@@ -56,8 +56,33 @@ export default function Ratgeber() {
   }, []);
 
   if (!data) {
-    return <div>Loading...</div>;
+    return (
+      <div className='flex flex-col gap-16 m-5'>
+        <section className='bg-neutral-50 flex flex-col p-10 md:p-15 lg:p-20 gap-8 md:gap-10 lg:gap-12 rounded-lg'>
+          <div className='h-6 w-full bg-gray-200 animate-pulse rounded-2xl'></div>
+          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 lg:gap-12'>
+            <div className='animate-pulse'>
+              <div className='h-64 w-full bg-gray-200 animate-pulse rounded-2xl'></div>
+              <div className='h-6 w-full bg-gray-200 mt-5 animate-pulse rounded-2xl'></div>
+              <div className='h-4 w-1/2 bg-gray-200 mt-5 animate-pulse rounded-2xl'></div>
+            </div>
+            <div className='animate-pulse'>
+              <div className='h-64 w-full bg-gray-200 animate-pulse rounded-2xl'></div>
+              <div className='h-6 w-full bg-gray-200 mt-5 animate-pulse rounded-2xl'></div>
+              <div className='h-4 w-1/2 bg-gray-200 mt-5 animate-pulse rounded-2xl'></div>
+            </div>
+            <div className='animate-pulse'>
+              <div className='h-64 w-full bg-gray-200 animate-pulse rounded-2xl'></div>
+              <div className='h-6 w-full bg-gray-200 mt-5 animate-pulse rounded-2xl'></div>
+              <div className='h-4 w-1/2 bg-gray-200 mt-5 animate-pulse rounded-2xl'></div>
+            </div>
+          </div>
+        </section>
+      </div>
+    );
   }
+
+  // Rest of your code...
 
   return (
     <div className='flex flex-col gap-16 m-5'>
@@ -74,7 +99,7 @@ export default function Ratgeber() {
             }
 
             return (
-              <Link href={`/Ratgeber/${post.fields.slug}`}>
+              <Link key={post.fields.slug} href={`/Ratgeber/${post.fields.slug}`}>
                 
                   <BlogCard 
                     title={post.fields.title}

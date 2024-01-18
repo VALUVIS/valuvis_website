@@ -1,9 +1,5 @@
 import React, { useState } from 'react';
 import { FourFieldSection } from './FourFieldSection';
-import HouseIcon from '../Icons/HouseIcon';
-import ApartmentIcon from '../Icons/ApartmentIcon';
-import GroundIcon from '../Icons/GroundIcon';
-import FactoryIcon from '../Icons/FactoryIcon';
 import ColumnFieldSection from './ColumnFieldSection';
 import SliderSection from './SliderSection';
 import InputSection from './InputSection';
@@ -16,13 +12,16 @@ const HouseForm = () => {
     const [landSize, setLandSize] = useState('');
     const [houseAge, setHouseAge] = useState('');
     const [livingSpace, setLivingSpace] = useState('');
+    const [streetAndNumber, setStreetAndNumber] = useState('');
+    const [postCode, setPostCode] = useState('');
+
 
     // Vordefinierte Auswahlmöglichkeiten
     const houseTypes = {
-        'Einfamilienhaus': HouseIcon,
-        'Mehrfamilienhaus': ApartmentIcon,
-        'Reihenhaus': HouseIcon,
-        'Doppelhaushälfte': HouseIcon
+        'Einfamilienhaus': '/gifs/house.gif',
+        'Mehrfamilienhaus': '/gifs/doublehouse.gif',
+        'Reihenhaus': '/gifs/threehouses.gif',
+        'Doppelhaushälfte': '/gifs/houses.gif'
     };
     const landSizes = ['bis 500 m²', 'bis 1000 m²', 'bis 2000 m²', 'über 2000 m²', 'Ich weiß es nicht'];
     const houseAges = ['vor 1940', 'vor 1980', 'vor 2010', 'nach 2010', 'Ich weiß es nicht'];
@@ -44,28 +43,36 @@ const HouseForm = () => {
         }
     };
 
-    // Event-Handler
-    const handleHouseTypeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setHouseType(event.target.value);
+    const handleSelectHouseType = (field: string) => {
+        setHouseAge(field);
+        goToNextStep(); 
     };
 
-    const handleLandSizeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setLandSize(event.target.value);
+    const handleSelectLandSize = (field: string) => {
+        setLandSize(field);
+        goToNextStep(); 
     };
 
-    const handleHouseAgeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setHouseType(event.target.value);
+    const handleSelectHouseAge = (field: string) => {
+        setHouseAge(field);
+        goToNextStep(); 
     };
 
-    const handleLivingSpaceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setHouseType(event.target.value);
+    const handleSelectLivingSpace = (value: string) => {
+        setLivingSpace(value);
+        goToNextStep(); 
     };
 
     return (
-        <div className='flex'>
+        <div className='flex flex-col-reverse md:flex-row gap-4 md:gap-0 items-center'>
             
-            <button type='button' onClick={goToPreviousStep} className='flex flex-col items-center justify-center'>
-                <svg height="30" viewBox="0 -960 960 960" width="30">
+            <button 
+                type='button' 
+                onClick={goToPreviousStep} 
+                className='h-20 w-20 flex flex-col items-center justify-center border-2 border-orange-500 rounded-full text-orange-500 hover:bg-orange-500 hover:text-white transition-colors duration-200' 
+                aria-label='Zurück'
+            >
+                <svg height="30" viewBox="0 -960 960 960" width="30" className="fill-current">
                     <path d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z"/>
                 </svg>
                 Zurück
@@ -76,26 +83,26 @@ const HouseForm = () => {
                     <FourFieldSection 
                         title="Erzählen Sie uns ein wenig mehr Ihre Immobilie" 
                         subtitle="Um welche Art von Haus handelt es sich bei Ihrer Immobilie?" 
-                        fieldIconPairs={Object.entries(houseTypes).map(([field, icon]) => ({ field, icon }))}
-                        onSelect={goToNextStep} 
+                        fieldImagePairs={Object.entries(houseTypes).map(([field, image]) => ({ field, image }))}
+                        onSelect={handleSelectHouseType} 
                     />
                 )}
 
                 {currentStep === 2 && (
                     <ColumnFieldSection 
-                    title="Erzählen Sie uns ein wenig mehr Ihr Haus" 
-                    subtitle="Wie groß ist die Grundstücksfläche?" 
-                    fields={landSizes}
-                    onSelect={goToNextStep} 
+                        title="Erzählen Sie uns ein wenig mehr Ihr Haus" 
+                        subtitle="Wie groß ist die Grundstücksfläche?" 
+                        fields={landSizes}
+                        onSelect={handleSelectLandSize} 
                     />
                 )}
 
                 {currentStep === 3 && (
                     <ColumnFieldSection 
-                    title="Erzählen Sie uns ein wenig mehr Ihr Haus" 
-                    subtitle="Wann wurde die Immobilie gebaut?" 
-                    fields={houseAges}
-                    onSelect={goToNextStep} 
+                        title="Erzählen Sie uns ein wenig mehr Ihr Haus" 
+                        subtitle="Wann wurde die Immobilie gebaut?" 
+                        fields={houseAges}
+                        onSelect={handleSelectHouseAge} 
                     />
                 )}
 
@@ -106,8 +113,8 @@ const HouseForm = () => {
                         max={livingSpacesMax}
                         unit={livingSpacesUnit}
                         initialValue={livingSpacesInitialValue}
-                        onNext={goToNextStep} 
-                        onSkip={goToNextStep}
+                        onNext={handleSelectLivingSpace} 
+                        onSkip={handleSelectLivingSpace}
                     />
                 )}
 
@@ -116,13 +123,25 @@ const HouseForm = () => {
                         <InputSection
                             title="Erzählen Sie uns ein wenig mehr Ihr Haus"
                             values={['Straße und Hausnummer', 'PLZ']}
+                            onSubmit={(data) => {
+                                setStreetAndNumber(data["Straße und Hausnummer"]);
+                                setPostCode(data["PLZ"]);
+                                goToNextStep();
+                            }}
                         />
-                        <button type="button" onClick={goToNextStep}>Bewertung anfordern</button>
                     </div>
                 )}   
 
                 {currentStep === 6 && (
-                    <ContactSection />
+                    <ContactSection
+                        object='Haus'
+                        houseType={houseType}
+                        landSize={landSize}
+                        houseAge={houseAge}
+                        livingSpace={livingSpace}
+                        streetAndNumber={streetAndNumber}
+                        postCode={postCode}
+                    />
                 )}
             </div>
              

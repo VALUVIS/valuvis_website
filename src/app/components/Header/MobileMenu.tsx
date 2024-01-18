@@ -30,7 +30,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, navigationLinks, onClos
     }
 
     return (
-        <div className={`fixed top-0 left-0 flex flex-col gap-4 w-full h-full lg:hidden bg-white overflow-y-hidden z-50`}>
+        <div className={`fixed top-0 left-0 flex flex-col gap-4 w-full h-full lg:hidden bg-white overflow-y-auto z-50`}>
           <div className="flex justify-between items-center border-b border-gray-200">
       
             <div className="logo flex flex-shrink-0 items-center p-4">
@@ -55,11 +55,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, navigationLinks, onClos
           </div>
           <ul className='flex flex-col gap-5 w-full pl-5'>
             {navigationLinks.map((link) => {
-              if (link.title === 'Immobilien kaufen') {
-                return (
-                    <DropdownMobileMenu key={link.title} title={link.title} path={link.path} links={kaufLinks} onClose={onClose} />
-                );
-              } else if (link.title === 'Immobilien verkaufen') {
+              if (link.title === 'Immobilien verkaufen') {
                 return (
                     <DropdownMobileMenu key={link.title} title={link.title} path={link.path} links={verkaufLinks} onClose={onClose} />
                 );

@@ -41,7 +41,9 @@ const moreLinks: NavLink[] = [
   { title: 'Karriere', path: '/Karriere' },
   { title: 'FAQ', path: '/FAQ' },
   { title: 'Ratgeber', path: '/Ratgeber' },
-  { title: 'Kontakt', path: '/Kontakt' }
+  { title: 'Kontakt', path: '/Kontakt' },
+  { title: 'Impressum', path: '/Impressum' },
+  { title: 'Datenschutz', path: '/Datenschutz' }
 ];
 
 const Header: React.FC = () => {
@@ -72,7 +74,15 @@ const Header: React.FC = () => {
 
   const handleMouseEnter = (linkTitle: string) => {
     setHoveredLink(linkTitle);
-    setDropdownContent(linkTitle);
+    if (linkTitle === 'Immobilien kaufen' || linkTitle === 'Immobilien verkaufen' || linkTitle === 'Mehr') {
+      setDropdownContent(linkTitle);
+    } else {
+      setDropdownContent('');
+    }
+  };
+
+  const handleMouseLeave = () => {
+    setDropdownContent('');
   };
 
   const handleCloseMenu = () => {
@@ -81,7 +91,7 @@ const Header: React.FC = () => {
 
   return (
     <>
-      <header className={`fixed top-0 left-0 z-50 w-full shadow-md bg-transparent text-sm md:text-base lg:text-base`}>
+      <header className={`fixed top-0 left-0 z-50 w-full shadow-md bg-transparent text-sm md:text-base lg:text-base`} onMouseLeave={handleMouseLeave}>
         <nav className='hidden lg:flex peer px-4 h-auto w-full items-center justify-between lg:justify-start gap-8 md:gap-14 lg:gap-10 xl:gap-20 backdrop-filter backdrop-blur-lg bg-opacity-30 bg-white'>
           <div className="logo flex flex-shrink-0 items-center">
             <Image

@@ -40,7 +40,19 @@ export default function  JobPage()  {
     }, []);
 
     if (!data) {
-        return <div>Loading...</div>;
+        return (
+            <div className='flex flex-col gap-16 m-5'>
+                <section className='bg-neutral-50 flex flex-col items-center p-10 md:p-15 lg:p-20 gap-8 md:gap-10 lg:gap-12 rounded-lg'>
+                    
+                    <div className='flex flex-col gap-4 md:gap-8 w-[80%] md:w-[60%] animate-pulse'>
+                        
+                        <div className='h-12 w-full bg-gray-200 mt-5 rounded-2xl'></div>
+                        <div className='h-80 w-full bg-gray-200 rounded-2xl'></div>
+                        
+                    </div>
+                </section>
+            </div>
+        );
     }
 
     return (

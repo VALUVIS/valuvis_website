@@ -37,10 +37,9 @@ const Bewerbung: React.FC = () => {
         setNote(event.target.value);
     };
 
-    const handleSend = async (event: React.FormEvent) => {
-
-        // Senden der Mail mit Propstack
+    const handleSend = async () => {
         try {
+            // Erstellen des Kontakts in Propstack
             const response = await apiCall('https://api.propstack.de/v1/contacts', 'POST', {
                 client: {
                     email: email,
@@ -54,14 +53,12 @@ const Bewerbung: React.FC = () => {
 
             const clientId = response.id;
 
-            // Hochladen aller Dokumente
+            // Hochladen aller Dokumente in Propstack
             for (const file of documents) {
-
                 const reader = new FileReader();
                 reader.readAsDataURL(file);
                 reader.onloadend = async () => {
                     if (reader.result) {
-                        
                         const base64String = reader.result as string;
 
                         await apiCall('https://api.propstack.de/v1/documents', 'POST', {
@@ -73,6 +70,17 @@ const Bewerbung: React.FC = () => {
                     }
                 };
             }
+
+            // Senden der E-Mail
+            await apiCall('https://api.propstack.de/v1/messages', 'POST', {
+                    
+                message : {
+                    broker_id: 125134,
+                    to: ["m.ruecker@valuvis.de"],
+                    subject: `Initiativbewerbung von ${name} ${lastName}`,
+                    body: `Das ist eine Initiativbewerbung von ${name} ${lastName}. Die E-Mail-Adresse lautet ${email}. Die Nachricht lautet: ${note}. Es wurden ${fileCount} Dokumente nach Propstack hochgeladen.`,
+                }
+            });
 
             setModalContent('Vielen Dank für Ihre Bewerbung! Wir werden uns in Kürze bei Ihnen über E-Mail melden.');
         } catch (error) {
@@ -99,15 +107,15 @@ const Bewerbung: React.FC = () => {
             <Modal content={modalContent} onClose={() => setModalContent(null)} />
             <div className='flex flex-col gap-16 m-5'>
                 <section className='bg-neutral-50 flex flex-col items-center p-6 md:p-15 lg:p-20 rounded-lg gap-12 w-full'>
-                    <h2 className='text-xl md:text-2xl lg:text-3xl tracking-widest leading-normal'>Inititativbewerbung</h2>
+                    <h2 className='text-xl md:text-2xl lg:text-3xl tracking-widest leading-normal'>Initiativbewerbung</h2>
                     <form className='flex flex-col gap-4 max-w-full'>
-                        <div className='flex gap-2 max-w-full'>
+                        <div className='flex flex-col md:flex-row gap-4 md:gap-2 max-w-full'>
                             <input 
                                 type="text" 
                                 value={name} 
                                 onChange={handleNameChange} 
                                 placeholder="Vorname *"
-                                className="rounded-lg border-2 border-gray-400 p-1 max-w-[49%]"
+                                className="rounded-lg border-2 border-gray-400 p-1"
                             />
                             
                             <input 
@@ -115,7 +123,7 @@ const Bewerbung: React.FC = () => {
                                 value={lastName} 
                                 onChange={handleLastNameChange} 
                                 placeholder="Nachname *"
-                                className="rounded-lg border-2 border-gray-400 p-1  max-w-[49%]"
+                                className="rounded-lg border-2 border-gray-400 p-1"
                             />
                         </div>
                         

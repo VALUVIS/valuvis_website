@@ -21,14 +21,11 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({ dropdownContent, kaufLinks,
       ref={divRef}
       className={`hidden peer-hover:flex hover:flex absolute flex flex-col backdrop-filter backdrop-blur-lg bg-opacity-30 bg-white transition-height shadow-md`}
     >
-      {dropdownContent === 'Immobilien kaufen' && kaufLinks.map((link) => (
-        <Link key={link.id} href={link.path} className='px-5 py-3 bg-opacity-30 hover:bg-opacity-60 hover:bg-orange-500'>{link.title}</Link>
+      {dropdownContent === 'Immobilien verkaufen' && verkaufLinks.map((link, index) => (
+        <Link key={index} href={link.path} className='px-5 py-3 bg-opacity-30 hover:bg-opacity-60 hover:bg-orange-500'>{link.title}</Link>
       ))}
-      {dropdownContent === 'Immobilien verkaufen' && verkaufLinks.map((link) => (
-        <Link key={link.id} href={link.path} className='px-5 py-3 bg-opacity-30 hover:bg-opacity-60 hover:bg-orange-500'>{link.title}</Link>
-      ))}
-      {dropdownContent === 'Mehr' && moreLinks.map((link) => (
-        <Link key={link.id} href={link.path} className='px-5 py-3 bg-opacity-30 hover:bg-opacity-60 hover:bg-orange-500'>{link.title}</Link>
+      {dropdownContent === 'Mehr' && moreLinks.map((link, index) => (
+        <Link key={index} href={link.path} className='px-5 py-3 bg-opacity-30 hover:bg-opacity-60 hover:bg-orange-500'>{link.title}</Link>
       ))}
     </div>
   );
